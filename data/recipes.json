@@ -1,0 +1,248 @@
+[
+  {
+    "id": "spaghetti-bolognese",
+    "name": "Spaghetti Bolognese",
+    "cuisine": "Italian",
+    "tags": ["pasta", "beef", "dinner"],
+    "servingsBase": 4,
+    "ingredients": [
+      { "name": "spaghetti", "quantity": 400, "unit": "g", "category": "Pantry" },
+      { "name": "ground beef", "quantity": 500, "unit": "g", "category": "Meat" },
+      { "name": "yellow onion", "quantity": 1, "unit": "item", "notes": "diced", "category": "Produce" },
+      { "name": "garlic", "quantity": 3, "unit": "clove", "notes": "minced", "category": "Produce" },
+      { "name": "crushed tomatoes", "quantity": 400, "unit": "g", "category": "Pantry" },
+      { "name": "tomato paste", "quantity": 2, "unit": "tbsp", "category": "Pantry" },
+      { "name": "olive oil", "quantity": 2, "unit": "tbsp", "category": "Pantry" },
+      { "name": "dried oregano", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "salt", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "black pepper", "quantity": 0.5, "unit": "tsp", "category": "Spices" },
+      { "name": "parmesan cheese", "quantity": 50, "unit": "g", "notes": "grated", "category": "Dairy" }
+    ]
+  },
+  {
+    "id": "chicken-stir-fry",
+    "name": "Chicken Stir Fry",
+    "cuisine": "Asian",
+    "tags": ["chicken", "quick", "dinner", "healthy"],
+    "servingsBase": 4,
+    "ingredients": [
+      { "name": "chicken breast", "quantity": 500, "unit": "g", "notes": "sliced", "category": "Meat" },
+      { "name": "broccoli", "quantity": 2, "unit": "cup", "notes": "florets", "category": "Produce" },
+      { "name": "bell pepper", "quantity": 2, "unit": "item", "notes": "sliced", "category": "Produce" },
+      { "name": "carrot", "quantity": 2, "unit": "item", "notes": "julienned", "category": "Produce" },
+      { "name": "garlic", "quantity": 3, "unit": "clove", "notes": "minced", "category": "Produce" },
+      { "name": "ginger", "quantity": 1, "unit": "tbsp", "notes": "minced", "category": "Produce" },
+      { "name": "soy sauce", "quantity": 3, "unit": "tbsp", "category": "Pantry" },
+      { "name": "sesame oil", "quantity": 1, "unit": "tbsp", "category": "Pantry" },
+      { "name": "vegetable oil", "quantity": 2, "unit": "tbsp", "category": "Pantry" },
+      { "name": "cornstarch", "quantity": 1, "unit": "tbsp", "category": "Pantry" },
+      { "name": "green onion", "quantity": 3, "unit": "item", "notes": "sliced", "category": "Produce" }
+    ]
+  },
+  {
+    "id": "beef-tacos",
+    "name": "Beef Tacos",
+    "cuisine": "Mexican",
+    "tags": ["beef", "quick", "dinner"],
+    "servingsBase": 4,
+    "ingredients": [
+      { "name": "ground beef", "quantity": 500, "unit": "g", "category": "Meat" },
+      { "name": "taco shells", "quantity": 8, "unit": "item", "category": "Pantry" },
+      { "name": "yellow onion", "quantity": 1, "unit": "item", "notes": "diced", "category": "Produce" },
+      { "name": "garlic", "quantity": 2, "unit": "clove", "notes": "minced", "category": "Produce" },
+      { "name": "cumin", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "chili powder", "quantity": 1, "unit": "tbsp", "category": "Spices" },
+      { "name": "paprika", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "salt", "quantity": 0.5, "unit": "tsp", "category": "Spices" },
+      { "name": "cheddar cheese", "quantity": 100, "unit": "g", "notes": "shredded", "category": "Dairy" },
+      { "name": "lettuce", "quantity": 2, "unit": "cup", "notes": "shredded", "category": "Produce" },
+      { "name": "tomato", "quantity": 2, "unit": "item", "notes": "diced", "category": "Produce" },
+      { "name": "sour cream", "quantity": 0.5, "unit": "cup", "category": "Dairy" }
+    ]
+  },
+  {
+    "id": "caesar-salad",
+    "name": "Caesar Salad",
+    "cuisine": "American",
+    "tags": ["salad", "quick", "lunch", "healthy"],
+    "servingsBase": 2,
+    "ingredients": [
+      { "name": "romaine lettuce", "quantity": 1, "unit": "item", "notes": "chopped", "category": "Produce" },
+      { "name": "parmesan cheese", "quantity": 50, "unit": "g", "notes": "shaved", "category": "Dairy" },
+      { "name": "croutons", "quantity": 1, "unit": "cup", "category": "Pantry" },
+      { "name": "garlic", "quantity": 2, "unit": "clove", "notes": "minced", "category": "Produce" },
+      { "name": "olive oil", "quantity": 0.25, "unit": "cup", "category": "Pantry" },
+      { "name": "lemon juice", "quantity": 2, "unit": "tbsp", "category": "Produce" },
+      { "name": "dijon mustard", "quantity": 1, "unit": "tsp", "category": "Pantry" },
+      { "name": "anchovy paste", "quantity": 1, "unit": "tsp", "category": "Pantry" },
+      { "name": "black pepper", "quantity": 0.25, "unit": "tsp", "category": "Spices" }
+    ]
+  },
+  {
+    "id": "vegetable-curry",
+    "name": "Vegetable Curry",
+    "cuisine": "Indian",
+    "tags": ["vegetarian", "dinner", "healthy"],
+    "servingsBase": 4,
+    "ingredients": [
+      { "name": "chickpeas", "quantity": 400, "unit": "g", "notes": "canned, drained", "category": "Pantry" },
+      { "name": "coconut milk", "quantity": 400, "unit": "ml", "category": "Pantry" },
+      { "name": "yellow onion", "quantity": 1, "unit": "item", "notes": "diced", "category": "Produce" },
+      { "name": "garlic", "quantity": 3, "unit": "clove", "notes": "minced", "category": "Produce" },
+      { "name": "ginger", "quantity": 1, "unit": "tbsp", "notes": "minced", "category": "Produce" },
+      { "name": "cauliflower", "quantity": 2, "unit": "cup", "notes": "florets", "category": "Produce" },
+      { "name": "spinach", "quantity": 2, "unit": "cup", "category": "Produce" },
+      { "name": "curry powder", "quantity": 2, "unit": "tbsp", "category": "Spices" },
+      { "name": "turmeric", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "cumin", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "vegetable oil", "quantity": 2, "unit": "tbsp", "category": "Pantry" },
+      { "name": "salt", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "basmati rice", "quantity": 2, "unit": "cup", "category": "Pantry" }
+    ]
+  },
+  {
+    "id": "grilled-salmon",
+    "name": "Grilled Salmon with Asparagus",
+    "cuisine": "American",
+    "tags": ["fish", "healthy", "dinner"],
+    "servingsBase": 2,
+    "ingredients": [
+      { "name": "salmon fillet", "quantity": 400, "unit": "g", "category": "Meat" },
+      { "name": "asparagus", "quantity": 1, "unit": "lb", "notes": "trimmed", "category": "Produce" },
+      { "name": "olive oil", "quantity": 3, "unit": "tbsp", "category": "Pantry" },
+      { "name": "lemon", "quantity": 1, "unit": "item", "category": "Produce" },
+      { "name": "garlic", "quantity": 2, "unit": "clove", "notes": "minced", "category": "Produce" },
+      { "name": "dried dill", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "salt", "quantity": 0.5, "unit": "tsp", "category": "Spices" },
+      { "name": "black pepper", "quantity": 0.25, "unit": "tsp", "category": "Spices" }
+    ]
+  },
+  {
+    "id": "mushroom-risotto",
+    "name": "Mushroom Risotto",
+    "cuisine": "Italian",
+    "tags": ["vegetarian", "dinner"],
+    "servingsBase": 4,
+    "ingredients": [
+      { "name": "arborio rice", "quantity": 1.5, "unit": "cup", "category": "Pantry" },
+      { "name": "cremini mushrooms", "quantity": 300, "unit": "g", "notes": "sliced", "category": "Produce" },
+      { "name": "yellow onion", "quantity": 1, "unit": "item", "notes": "diced", "category": "Produce" },
+      { "name": "garlic", "quantity": 2, "unit": "clove", "notes": "minced", "category": "Produce" },
+      { "name": "white wine", "quantity": 0.5, "unit": "cup", "category": "Pantry" },
+      { "name": "vegetable broth", "quantity": 4, "unit": "cup", "category": "Pantry" },
+      { "name": "butter", "quantity": 3, "unit": "tbsp", "category": "Dairy" },
+      { "name": "parmesan cheese", "quantity": 75, "unit": "g", "notes": "grated", "category": "Dairy" },
+      { "name": "olive oil", "quantity": 2, "unit": "tbsp", "category": "Pantry" },
+      { "name": "fresh thyme", "quantity": 1, "unit": "tbsp", "category": "Produce" },
+      { "name": "salt", "quantity": 0.5, "unit": "tsp", "category": "Spices" },
+      { "name": "black pepper", "quantity": 0.25, "unit": "tsp", "category": "Spices" }
+    ]
+  },
+  {
+    "id": "pad-thai",
+    "name": "Pad Thai",
+    "cuisine": "Thai",
+    "tags": ["noodles", "quick", "dinner"],
+    "servingsBase": 4,
+    "ingredients": [
+      { "name": "rice noodles", "quantity": 250, "unit": "g", "category": "Pantry" },
+      { "name": "shrimp", "quantity": 300, "unit": "g", "notes": "peeled", "category": "Meat" },
+      { "name": "egg", "quantity": 2, "unit": "item", "category": "Dairy" },
+      { "name": "bean sprouts", "quantity": 2, "unit": "cup", "category": "Produce" },
+      { "name": "green onion", "quantity": 4, "unit": "item", "notes": "sliced", "category": "Produce" },
+      { "name": "garlic", "quantity": 3, "unit": "clove", "notes": "minced", "category": "Produce" },
+      { "name": "fish sauce", "quantity": 3, "unit": "tbsp", "category": "Pantry" },
+      { "name": "tamarind paste", "quantity": 2, "unit": "tbsp", "category": "Pantry" },
+      { "name": "brown sugar", "quantity": 2, "unit": "tbsp", "category": "Pantry" },
+      { "name": "lime", "quantity": 1, "unit": "item", "category": "Produce" },
+      { "name": "peanuts", "quantity": 0.5, "unit": "cup", "notes": "crushed", "category": "Pantry" },
+      { "name": "vegetable oil", "quantity": 3, "unit": "tbsp", "category": "Pantry" },
+      { "name": "cilantro", "quantity": 0.25, "unit": "cup", "notes": "chopped", "category": "Produce" }
+    ]
+  },
+  {
+    "id": "chicken-fajitas",
+    "name": "Chicken Fajitas",
+    "cuisine": "Mexican",
+    "tags": ["chicken", "quick", "dinner"],
+    "servingsBase": 4,
+    "ingredients": [
+      { "name": "chicken breast", "quantity": 500, "unit": "g", "notes": "sliced", "category": "Meat" },
+      { "name": "bell pepper", "quantity": 3, "unit": "item", "notes": "sliced", "category": "Produce" },
+      { "name": "yellow onion", "quantity": 1, "unit": "item", "notes": "sliced", "category": "Produce" },
+      { "name": "garlic", "quantity": 2, "unit": "clove", "notes": "minced", "category": "Produce" },
+      { "name": "lime juice", "quantity": 2, "unit": "tbsp", "category": "Produce" },
+      { "name": "cumin", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "chili powder", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "paprika", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "olive oil", "quantity": 2, "unit": "tbsp", "category": "Pantry" },
+      { "name": "flour tortillas", "quantity": 8, "unit": "item", "category": "Pantry" },
+      { "name": "sour cream", "quantity": 0.5, "unit": "cup", "category": "Dairy" },
+      { "name": "cheddar cheese", "quantity": 100, "unit": "g", "notes": "shredded", "category": "Dairy" },
+      { "name": "salt", "quantity": 0.5, "unit": "tsp", "category": "Spices" }
+    ]
+  },
+  {
+    "id": "minestrone-soup",
+    "name": "Minestrone Soup",
+    "cuisine": "Italian",
+    "tags": ["soup", "vegetarian", "healthy"],
+    "servingsBase": 6,
+    "ingredients": [
+      { "name": "cannellini beans", "quantity": 400, "unit": "g", "notes": "canned, drained", "category": "Pantry" },
+      { "name": "diced tomatoes", "quantity": 400, "unit": "g", "notes": "canned", "category": "Pantry" },
+      { "name": "vegetable broth", "quantity": 6, "unit": "cup", "category": "Pantry" },
+      { "name": "pasta", "quantity": 1, "unit": "cup", "notes": "small shapes", "category": "Pantry" },
+      { "name": "yellow onion", "quantity": 1, "unit": "item", "notes": "diced", "category": "Produce" },
+      { "name": "carrot", "quantity": 2, "unit": "item", "notes": "diced", "category": "Produce" },
+      { "name": "celery", "quantity": 2, "unit": "item", "notes": "diced", "category": "Produce" },
+      { "name": "zucchini", "quantity": 1, "unit": "item", "notes": "diced", "category": "Produce" },
+      { "name": "garlic", "quantity": 3, "unit": "clove", "notes": "minced", "category": "Produce" },
+      { "name": "olive oil", "quantity": 2, "unit": "tbsp", "category": "Pantry" },
+      { "name": "dried basil", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "dried oregano", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "salt", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "black pepper", "quantity": 0.5, "unit": "tsp", "category": "Spices" },
+      { "name": "parmesan cheese", "quantity": 50, "unit": "g", "notes": "grated", "category": "Dairy" }
+    ]
+  },
+  {
+    "id": "greek-salad",
+    "name": "Greek Salad",
+    "cuisine": "Mediterranean",
+    "tags": ["salad", "quick", "healthy", "vegetarian"],
+    "servingsBase": 4,
+    "ingredients": [
+      { "name": "cucumber", "quantity": 1, "unit": "item", "notes": "cubed", "category": "Produce" },
+      { "name": "tomato", "quantity": 4, "unit": "item", "notes": "cubed", "category": "Produce" },
+      { "name": "red onion", "quantity": 0.5, "unit": "item", "notes": "sliced", "category": "Produce" },
+      { "name": "bell pepper", "quantity": 1, "unit": "item", "notes": "sliced", "category": "Produce" },
+      { "name": "kalamata olives", "quantity": 0.5, "unit": "cup", "category": "Pantry" },
+      { "name": "feta cheese", "quantity": 150, "unit": "g", "notes": "cubed", "category": "Dairy" },
+      { "name": "olive oil", "quantity": 0.25, "unit": "cup", "category": "Pantry" },
+      { "name": "red wine vinegar", "quantity": 2, "unit": "tbsp", "category": "Pantry" },
+      { "name": "dried oregano", "quantity": 1, "unit": "tsp", "category": "Spices" },
+      { "name": "salt", "quantity": 0.5, "unit": "tsp", "category": "Spices" },
+      { "name": "black pepper", "quantity": 0.25, "unit": "tsp", "category": "Spices" }
+    ]
+  },
+  {
+    "id": "fried-rice",
+    "name": "Vegetable Fried Rice",
+    "cuisine": "Chinese",
+    "tags": ["rice", "quick", "vegetarian", "dinner"],
+    "servingsBase": 4,
+    "ingredients": [
+      { "name": "jasmine rice", "quantity": 3, "unit": "cup", "notes": "cooked, cooled", "category": "Pantry" },
+      { "name": "egg", "quantity": 3, "unit": "item", "category": "Dairy" },
+      { "name": "carrot", "quantity": 1, "unit": "item", "notes": "diced", "category": "Produce" },
+      { "name": "frozen peas", "quantity": 1, "unit": "cup", "category": "Frozen" },
+      { "name": "green onion", "quantity": 4, "unit": "item", "notes": "sliced", "category": "Produce" },
+      { "name": "garlic", "quantity": 3, "unit": "clove", "notes": "minced", "category": "Produce" },
+      { "name": "soy sauce", "quantity": 3, "unit": "tbsp", "category": "Pantry" },
+      { "name": "sesame oil", "quantity": 1, "unit": "tbsp", "category": "Pantry" },
+      { "name": "vegetable oil", "quantity": 3, "unit": "tbsp", "category": "Pantry" },
+      { "name": "white pepper", "quantity": 0.25, "unit": "tsp", "category": "Spices" }
+    ]
+  }
+]

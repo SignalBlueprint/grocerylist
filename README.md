@@ -1,36 +1,144 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Grocery List Generator
 
-## Getting Started
+<!-- SB:APP
+name: Grocery List Generator
+slug: grocery-list-generator
+type: web
+health: green
+owner: Grif
+last_verified: 2026-01-06
+-->
 
-First, run the development server:
+A local-first web app that generates consolidated grocery lists from selected recipes. Built with Next.js (App Router), TypeScript, and Tailwind CSS.
 
+<!-- SB:SECTION:STATUS -->
+## Status
+
+**Active and functional.** App is fully operational with recipe selection, ingredient merging, and export features working. Main risk: no automated E2E tests.
+<!-- SB:SECTION:STATUS:END -->
+
+<!-- SB:SECTION:HOW_TO_RUN -->
+## How to Run
+
+### Prerequisites
+- Node.js 18.17 or later
+- npm
+
+### Install
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development
+```bash
+npm run dev
+```
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Test
+```bash
+npm test          # watch mode
+npm run test:run  # single run
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Build
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+### Lint
+```bash
+npm run lint
+```
+<!-- SB:SECTION:HOW_TO_RUN:END -->
 
-To learn more about Next.js, take a look at the following resources:
+<!-- SB:SECTION:ENV -->
+## Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+UNKNOWN - No .env files or environment variable references found in the codebase. App uses localStorage only.
+<!-- SB:SECTION:ENV:END -->
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<!-- SB:SECTION:ENTRY_POINTS -->
+## Entry Points
 
-## Deploy on Vercel
+| Route | Description |
+|-------|-------------|
+| `/` | Main app - recipe selection and grocery list generation |
+| `/print` | Print-friendly view of the current grocery list |
+<!-- SB:SECTION:ENTRY_POINTS:END -->
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<!-- SB:SECTION:NEXT_UPGRADES -->
+## Next Upgrades
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Add E2E tests using Playwright or Cypress
+2. Add PWA offline support (manifest.json exists but sw.js needs verification)
+3. Add recipe import/export validation to prevent malformed JSON
+<!-- SB:SECTION:NEXT_UPGRADES:END -->
+
+## Features
+
+- **Recipe Library**: 12 seed recipes across various cuisines (Italian, Asian, Mexican, etc.)
+- **Recipe Selection**: Search and filter recipes by name, cuisine, or tags
+- **Servings Adjustment**: Scale ingredient quantities based on desired servings
+- **Smart Merging**: Combines identical ingredients across recipes, with quantity scaling
+- **Ingredient Normalization**: Handles synonyms (scallions -> green onion) and unit variations (tablespoon -> tbsp)
+- **Category Grouping**: Items organized by category (Produce, Meat, Dairy, Pantry, Frozen, Spices, Other)
+- **Editable List**: Edit item names, quantities, units, and categories inline
+- **Checkboxes**: Track items as you shop (persisted to localStorage)
+- **Export Options**: Copy to clipboard, download as .txt, or print-friendly view
+- **Local Persistence**: All data saved to localStorage (no server required)
+- **Mobile Friendly**: Responsive design with drawer UI on mobile
+
+## Project Structure
+
+```
+grocerylist/
+├── data/
+│   └── recipes.json          # Seed recipe data (12 recipes)
+├── src/
+│   ├── app/
+│   │   ├── page.tsx          # Main app page
+│   │   ├── print/page.tsx    # Print-friendly view
+│   │   ├── layout.tsx        # Root layout
+│   │   └── globals.css       # Global styles
+│   ├── components/
+│   │   ├── RecipeCard.tsx    # Recipe card component
+│   │   ├── RecipeList.tsx    # Searchable recipe list
+│   │   ├── SelectedRecipes.tsx # Selected recipes panel
+│   │   └── GroceryList.tsx   # Grocery list with editing
+│   ├── hooks/
+│   │   └── useLocalStorage.ts # localStorage hook
+│   ├── lib/
+│   │   ├── merge-engine.ts   # Core merge/normalize logic
+│   │   └── merge-engine.test.ts # Unit tests
+│   └── types/
+│       └── index.ts          # TypeScript types
+└── vitest.config.ts          # Test configuration
+```
+
+## How It Works
+
+1. **Select Recipes**: Browse the recipe library, search by name/cuisine/tags, and click to select
+2. **Adjust Servings**: Modify the serving count for each selected recipe
+3. **Generate List**: Click "Generate Grocery List" to merge all ingredients
+4. **Shop**: Check off items as you shop, edit quantities, or add custom items
+5. **Export**: Copy, download, or print your list
+
+## Ingredient Merging Logic
+
+The merge engine:
+- Normalizes ingredient names (lowercase, trim, apply synonyms)
+- Normalizes units (tablespoon -> tbsp, grams -> g, etc.)
+- Scales quantities by serving ratio
+- Merges items with matching name + unit
+- Keeps items with different units separate (doesn't convert between unit systems)
+- Rounds quantities appropriately (whole numbers for g/oz, quarter increments for cups/tbsp)
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Testing**: Vitest
+- **Data Storage**: localStorage (no backend required)
