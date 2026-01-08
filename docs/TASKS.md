@@ -75,41 +75,40 @@ This task list implements the vision for evolving the Grocery List Generator fro
 
 **Tasks:**
 
-- [ ] Define store layout configuration in `src/lib/store-mode.ts`
-  - [ ] Create `STORE_LAYOUTS` constant with default layout order
-  - [ ] Default order: `['Produce', 'Dairy', 'Meat', 'Frozen', 'Pantry', 'Spices', 'Other']`
-  - [ ] Export `reorderByStoreLayout(categories: IngredientCategory[]): IngredientCategory[]`
+- [x] Define store layout configuration in `src/lib/store-mode.ts`
+  - [x] Create `STORE_LAYOUTS` constant with default layout order
+  - [x] Default order: `['Produce', 'Dairy', 'Meat', 'Frozen', 'Pantry', 'Spices', 'Other']`
+  - [x] Export `reorderByStoreLayout(categories: IngredientCategory[]): IngredientCategory[]`
 
-- [ ] Add store mode state to main app (`src/app/page.tsx`)
-  - [ ] Add `storeMode` boolean state (default: false)
-  - [ ] Persist store mode preference to localStorage key `grocery-store-mode`
+- [x] Add store mode state to main app (`src/app/page.tsx`)
+  - [x] Add `storeMode` boolean state (default: false)
+  - [x] Persist store mode preference to localStorage key `grocery-store-mode`
 
-- [ ] Create `StoreModeToggle` component in `src/components/StoreModeToggle.tsx`
-  - [ ] Toggle switch UI with cart/store icon
-  - [ ] Label: "Store Mode" when off, "Shopping..." when on
-  - [ ] Visual indicator (pulsing dot or different color) when active
+- [x] Create `StoreModeToggle` component in `src/components/StoreModeToggle.tsx`
+  - [x] Toggle switch UI with cart/store icon
+  - [x] Label: "Store Mode" when off, "Shopping..." when on
+  - [x] Visual indicator (pulsing dot or different color) when active
 
-- [ ] Update `GroceryList` component (`src/components/GroceryList.tsx`)
-  - [ ] Accept `storeMode` prop
-  - [ ] When store mode active, reorder CATEGORIES array using store layout
-  - [ ] Add sticky header showing "X of Y remaining" with progress bar
-  - [ ] Animate checked items: strikethrough + fade + drift to bottom of category
-  - [ ] Add CSS transition: `transition-all duration-300 ease-in-out`
+- [x] Update `GroceryList` component (`src/components/GroceryList.tsx`)
+  - [x] Accept `storeMode` prop
+  - [x] When store mode active, reorder CATEGORIES array using store layout
+  - [x] Add sticky header showing "X of Y remaining" with progress bar
+  - [x] Animate checked items: strikethrough + fade + drift to bottom of category
+  - [x] Add CSS transition: `transition-all duration-300 ease-in-out`
 
-- [ ] Implement completion celebration
-  - [ ] When all items checked in store mode, show confetti animation
-  - [ ] Install lightweight confetti library: `npm install canvas-confetti`
-  - [ ] Create `useConfetti` hook in `src/hooks/useConfetti.ts`
-  - [ ] Show toast: "Trip complete!" with option to clear list
+- [x] Implement completion celebration
+  - [x] When all items checked in store mode, show confetti animation
+  - [x] Create custom Confetti component in `src/components/Confetti.tsx` (CSS-based, no external library)
+  - [x] Show "All done! Great shopping trip!" message when complete
 
-- [ ] Create sticky progress header component
-  - [ ] Fixed position at top of grocery list
-  - [ ] Shows: "[checked]/[total] items" + visual progress bar
-  - [ ] Smooth animation as items get checked
+- [x] Create sticky progress header component
+  - [x] Fixed position at top of grocery list
+  - [x] Shows: "[remaining]/[total] items" + visual progress bar
+  - [x] Smooth animation as items get checked
 
-- [ ] Add store mode to print view (`src/app/print/page.tsx`)
-  - [ ] Respect store mode ordering when printing
-  - [ ] Show layout indicator: "Ordered for shopping"
+- [x] Add store mode to print view (`src/app/print/page.tsx`)
+  - [x] Respect store mode ordering when printing
+  - [x] Show layout indicator: "Organized for store shopping"
 
 **Acceptance Criteria:**
 - Toggle clearly indicates store mode is on/off

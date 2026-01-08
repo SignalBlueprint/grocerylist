@@ -3,8 +3,9 @@
 import { useEffect, useState, useMemo } from 'react';
 import { GroceryItem, IngredientCategory } from '@/types';
 import { groupByCategory, formatQuantity } from '@/lib/merge-engine';
+import { reorderByStoreLayout, loadStoreModePreference } from '@/lib/store-mode';
 
-const CATEGORIES: IngredientCategory[] = [
+const DEFAULT_CATEGORIES: IngredientCategory[] = [
   'Produce',
   'Meat',
   'Dairy',
@@ -48,8 +49,23 @@ function useGroceryItems() {
 
 export default function PrintPage() {
   const { items, isLoading } = useGroceryItems();
+  const [storeMode, setStoreMode] = useState(false);
 
   const grouped = useMemo(() => groupByCategory(items), [items]);
+
+  // Compute ordered categories based on store mode
+  const categories = useMemo(() => {
+    if (storeMode) {
+      return reorderByStoreLayout(DEFAULT_CATEGORIES, 'default');
+    }
+    return DEFAULT_CATEGORIES;
+  }, [storeMode]);
+
+  // Load store mode preference
+  useEffect(() => {
+    const savedPreference = loadStoreModePreference();
+    setStoreMode(savedPreference);
+  }, []);
 
   useEffect(() => {
     if (!isLoading && items.length > 0) {
@@ -99,6 +115,11 @@ export default function PrintPage() {
             day: 'numeric',
           })}
         </p>
+        {storeMode && (
+          <p className="text-green-600 text-sm font-medium mt-1">
+            Organized for store shopping
+          </p>
+        )}
       </header>
 
       <button
@@ -109,7 +130,7 @@ export default function PrintPage() {
       </button>
 
       <div className="space-y-6">
-        {CATEGORIES.map((category) => {
+        {categories.map((category) => {
           const categoryItems = grouped[category];
           if (categoryItems.length === 0) return null;
 

@@ -66,3 +66,44 @@
 - Filtering works correctly for all dietary types
 
 ---
+
+## Horizon 1.2: Aisle-Order Mode (Store Mode)
+**Completed:** 2026-01-08T23:55:00Z
+
+**Files Changed:**
+- `src/lib/store-mode.ts` — Created store layout configuration with category reordering and localStorage persistence
+- `src/lib/store-mode.test.ts` — 18 unit tests covering layout reordering, persistence, and edge cases
+- `src/app/page.tsx` — Added storeMode state with localStorage persistence and toggle handler
+- `src/components/StoreModeToggle.tsx` — Toggle button component with cart icon and visual indicators
+- `src/components/GroceryList.tsx` — Full store mode integration with progress header, category reordering, and celebration
+- `src/components/Confetti.tsx` — Custom CSS-based confetti animation component (no external library)
+- `src/app/globals.css` — Added confetti-fall and confetti-spin keyframe animations
+- `src/app/print/page.tsx` — Store mode support for print view with layout indicator
+
+**Implementation Notes:**
+- Store mode reorders categories: Produce → Dairy → Meat → Frozen → Pantry → Spices → Other
+- Sticky progress header shows remaining items with animated progress bar
+- Checked items in store mode have green styling and fade to lower opacity
+- Custom confetti implementation uses CSS animations instead of external library (lighter weight)
+- Confetti triggers automatically when all items are checked in store mode
+- Progress header displays "X of Y remaining" with smooth progress bar animation
+- Print view respects store mode preference loaded from localStorage
+
+**Key Decisions:**
+- Used CSS-based confetti instead of canvas-confetti to avoid external dependency
+- Progress header integrated directly into GroceryList instead of separate component
+- Used useMemo for category reordering to avoid unnecessary recalculations
+- Used useRef to track previous remaining count to trigger celebration only once
+- Added smooth transitions (duration-300) for checked items in store mode
+
+**Verification:**
+- All 151 tests pass (18 new store-mode tests + previous tests)
+- Build compiles successfully with no TypeScript errors
+- Store mode toggle appears in grocery list header
+- Categories reorder correctly when store mode is toggled
+- Progress header shows accurate remaining count with progress bar
+- Confetti animates when all items are checked
+- Print view shows "Organized for store shopping" when store mode active
+- Preference persists across browser sessions via localStorage
+
+---

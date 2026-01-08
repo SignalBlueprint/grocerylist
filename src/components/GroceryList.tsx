@@ -1,8 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { GroceryItem, IngredientCategory } from '@/types';
 import { groupByCategory, formatQuantity, exportAsText } from '@/lib/merge-engine';
+import { reorderByStoreLayout, STORE_LAYOUTS } from '@/lib/store-mode';
+import { StoreModeToggle } from './StoreModeToggle';
+import { Confetti } from './Confetti';
 
 interface GroceryListProps {
   items: GroceryItem[];
@@ -11,9 +14,11 @@ interface GroceryListProps {
   onDeleteItem: (itemId: string) => void;
   onAddItem: (item: Omit<GroceryItem, 'id' | 'checked' | 'sourceRecipes'>) => void;
   onReset: () => void;
+  storeMode?: boolean;
+  onToggleStoreMode?: () => void;
 }
 
-const CATEGORIES: IngredientCategory[] = [
+const DEFAULT_CATEGORIES: IngredientCategory[] = [
   'Produce',
   'Meat',
   'Dairy',
@@ -35,6 +40,8 @@ export function GroceryList({
   onDeleteItem,
   onAddItem,
   onReset,
+  storeMode = false,
+  onToggleStoreMode,
 }: GroceryListProps) {
   const [collapsedCategories, setCollapsedCategories] = useState<Set<string>>(
     new Set()
@@ -48,8 +55,34 @@ export function GroceryList({
     unit: 'item',
     category: 'Other' as IngredientCategory,
   });
+  const [showCelebration, setShowCelebration] = useState(false);
+  const prevRemainingRef = useRef<number | null>(null);
 
   const grouped = groupByCategory(items);
+
+  // Compute ordered categories based on store mode
+  const categories = useMemo(() => {
+    if (storeMode) {
+      return reorderByStoreLayout(DEFAULT_CATEGORIES, 'default');
+    }
+    return DEFAULT_CATEGORIES;
+  }, [storeMode]);
+
+  // Calculate remaining items for store mode progress
+  const remainingCount = items.filter((i) => !i.checked).length;
+  const totalCount = items.length;
+  const progressPercent = totalCount > 0 ? ((totalCount - remainingCount) / totalCount) * 100 : 0;
+
+  // Trigger celebration when all items are checked in store mode
+  useEffect(() => {
+    if (storeMode && totalCount > 0 && remainingCount === 0 && prevRemainingRef.current !== 0) {
+      setShowCelebration(true);
+      // Reset celebration after animation completes
+      const timer = setTimeout(() => setShowCelebration(false), 4000);
+      return () => clearTimeout(timer);
+    }
+    prevRemainingRef.current = remainingCount;
+  }, [storeMode, remainingCount, totalCount]);
 
   const toggleCategory = (category: string) => {
     setCollapsedCategories((prev) => {
@@ -150,6 +183,37 @@ export function GroceryList({
 
   return (
     <div className="flex flex-col h-full">
+      {/* Confetti Celebration */}
+      <Confetti active={showCelebration} duration={4000} />
+
+      {/* Store Mode Progress Header */}
+      {storeMode && totalCount > 0 && (
+        <div className="sticky top-0 z-10 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg p-4 mb-4 shadow-lg">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <span className="font-semibold">Shopping Mode</span>
+            </div>
+            <span className="text-lg font-bold">
+              {remainingCount} of {totalCount} remaining
+            </span>
+          </div>
+          <div className="w-full bg-white/30 rounded-full h-3">
+            <div
+              className="bg-white rounded-full h-3 transition-all duration-500 ease-out"
+              style={{ width: `${progressPercent}%` }}
+            />
+          </div>
+          {remainingCount === 0 && (
+            <p className="text-center mt-2 text-sm font-medium animate-pulse">
+              All done! Great shopping trip!
+            </p>
+          )}
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div>
@@ -159,6 +223,10 @@ export function GroceryList({
           </p>
         </div>
         <div className="flex gap-2">
+          {/* Store Mode Toggle */}
+          {onToggleStoreMode && (
+            <StoreModeToggle enabled={storeMode} onToggle={onToggleStoreMode} />
+          )}
           <button
             onClick={handleCopyToClipboard}
             className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
@@ -245,7 +313,7 @@ export function GroceryList({
               }
               className="col-span-2 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              {CATEGORIES.map((cat) => (
+              {categories.map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}
                 </option>
@@ -271,7 +339,7 @@ export function GroceryList({
 
       {/* Grocery Items by Category */}
       <div className="flex-1 overflow-y-auto space-y-3">
-        {CATEGORIES.map((category) => {
+        {categories.map((category) => {
           const categoryItems = grouped[category];
           if (categoryItems.length === 0) return null;
 
@@ -312,16 +380,24 @@ export function GroceryList({
                   {categoryItems.map((item) => (
                     <div
                       key={item.id}
-                      className={`px-4 py-3 flex items-center gap-3 hover:bg-gray-50 ${
-                        item.checked ? 'bg-gray-50' : ''
-                      }`}
+                      className={`px-4 py-3 flex items-center gap-3 transition-all duration-300 ${
+                        item.checked
+                          ? storeMode
+                            ? 'bg-green-50 opacity-60'
+                            : 'bg-gray-50'
+                          : 'hover:bg-gray-50'
+                      } ${storeMode && item.checked ? 'order-last' : ''}`}
                     >
                       {/* Checkbox */}
                       <input
                         type="checkbox"
                         checked={item.checked}
                         onChange={() => onToggleItem(item.id)}
-                        className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        className={`w-5 h-5 rounded border-gray-300 focus:ring-2 transition-colors ${
+                          storeMode
+                            ? 'text-green-600 focus:ring-green-500'
+                            : 'text-blue-600 focus:ring-blue-500'
+                        }`}
                       />
 
                       {/* Item Details */}
@@ -408,7 +484,7 @@ export function GroceryList({
                           className="text-xs px-2 py-1 border border-blue-500 rounded"
                           autoFocus
                         >
-                          {CATEGORIES.map((cat) => (
+                          {categories.map((cat) => (
                             <option key={cat} value={cat}>
                               {cat}
                             </option>
