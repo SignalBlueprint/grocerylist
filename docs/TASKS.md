@@ -21,39 +21,39 @@ This task list implements the vision for evolving the Grocery List Generator fro
 
 **Tasks:**
 
-- [ ] Create dietary detection utility in `src/lib/dietary-utils.ts`
-  - [ ] Define `DietaryBadge` type: `'vegetarian' | 'vegan' | 'gluten-free' | 'dairy-free' | 'nut-free'`
-  - [ ] Create `MEAT_INGREDIENTS` constant array (beef, chicken, pork, fish, shrimp, bacon, etc.)
-  - [ ] Create `GLUTEN_INGREDIENTS` constant array (flour, bread, pasta, soy sauce, etc.)
-  - [ ] Create `DAIRY_INGREDIENTS` constant array (milk, cheese, butter, cream, yogurt, etc.)
-  - [ ] Create `NUT_INGREDIENTS` constant array (peanut, almond, walnut, cashew, etc.)
-  - [ ] Implement `detectDietaryBadges(ingredients: Ingredient[]): DietaryBadge[]` function
-  - [ ] Write unit tests in `src/lib/dietary-utils.test.ts` covering all badge types
+- [x] Create dietary detection utility in `src/lib/dietary-utils.ts`
+  - [x] Define `DietaryBadge` type: `'vegetarian' | 'vegan' | 'gluten-free' | 'dairy-free' | 'nut-free'`
+  - [x] Create `MEAT_INGREDIENTS` constant array (beef, chicken, pork, fish, shrimp, bacon, etc.)
+  - [x] Create `GLUTEN_INGREDIENTS` constant array (flour, bread, pasta, soy sauce, etc.)
+  - [x] Create `DAIRY_INGREDIENTS` constant array (milk, cheese, butter, cream, yogurt, etc.)
+  - [x] Create `NUT_INGREDIENTS` constant array (peanut, almond, walnut, cashew, etc.)
+  - [x] Implement `detectDietaryBadges(ingredients: Ingredient[]): DietaryBadge[]` function
+  - [x] Write unit tests in `src/lib/dietary-utils.test.ts` covering all badge types
 
-- [ ] Update `Recipe` type in `src/types/index.ts`
-  - [ ] Add optional `dietaryBadges?: DietaryBadge[]` field to Recipe interface
+- [x] Update `Recipe` type in `src/types/index.ts`
+  - [x] Add optional `dietaryBadges?: DietaryBadge[]` field to Recipe interface
 
-- [ ] Create `DietaryBadge` component in `src/components/DietaryBadge.tsx`
-  - [ ] Design badge with icon + label (green leaf for vegetarian, wheat-slash for gluten-free, etc.)
-  - [ ] Use Tailwind classes for badge colors: `bg-green-100 text-green-800` for vegetarian, etc.
-  - [ ] Make badges compact for recipe cards (small icon, optional text)
+- [x] Create `DietaryBadge` component in `src/components/DietaryBadge.tsx`
+  - [x] Design badge with icon + label (green leaf for vegetarian, wheat-slash for gluten-free, etc.)
+  - [x] Use Tailwind classes for badge colors: `bg-green-100 text-green-800` for vegetarian, etc.
+  - [x] Make badges compact for recipe cards (small icon, optional text)
 
-- [ ] Update `RecipeCard` component (`src/components/RecipeCard.tsx`)
-  - [ ] Import and call `detectDietaryBadges()` for each recipe
-  - [ ] Display badges below recipe name, before tags
-  - [ ] Ensure badges don't wrap awkwardly on mobile
+- [x] Update `RecipeCard` component (`src/components/RecipeCard.tsx`)
+  - [x] Import and call `detectDietaryBadges()` for each recipe
+  - [x] Display badges below recipe name, before tags
+  - [x] Ensure badges don't wrap awkwardly on mobile
 
-- [ ] Add dietary filter to `RecipeList` component (`src/components/RecipeList.tsx`)
-  - [ ] Add `selectedDietary` state for active dietary filter
-  - [ ] Add dietary filter button row below cuisine filters (use same pill style)
-  - [ ] Update `filteredRecipes` memo to include dietary badge filtering
-  - [ ] Show badge count next to filter button (e.g., "Vegetarian (4)")
+- [x] Add dietary filter to `RecipeList` component (`src/components/RecipeList.tsx`)
+  - [x] Add `selectedDietary` state for active dietary filter
+  - [x] Add dietary filter button row below cuisine filters (use same pill style)
+  - [x] Update `filteredRecipes` memo to include dietary badge filtering
+  - [x] Show badge count next to filter button (e.g., "Vegetarian (4)")
 
-- [ ] Update share preview text to include dietary info
-  - [ ] Modify `src/lib/share.ts` to include dietary summary in shared list title
+- [x] Update share preview text to include dietary info
+  - [x] Modify `src/lib/share.ts` to include dietary summary in shared list title
 
-- [ ] Hide empty categories in GroceryList when all recipes share a dietary restriction
-  - [ ] If no meat ingredients, auto-collapse or hide "Meat" category header
+- [x] Hide empty categories in GroceryList when all recipes share a dietary restriction
+  - [x] If no meat ingredients, auto-collapse or hide "Meat" category header (already implemented by default)
 
 **Acceptance Criteria:**
 - Dietary badges appear on all 12 seed recipes

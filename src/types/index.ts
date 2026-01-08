@@ -7,6 +7,13 @@ export type IngredientCategory =
   | 'Spices'
   | 'Other';
 
+export type DietaryBadge =
+  | 'vegetarian'
+  | 'vegan'
+  | 'gluten-free'
+  | 'dairy-free'
+  | 'nut-free';
+
 export interface Ingredient {
   name: string;
   quantity: number;
@@ -22,6 +29,7 @@ export interface Recipe {
   tags: string[];
   servingsBase: number;
   ingredients: Ingredient[];
+  dietaryBadges?: DietaryBadge[];
 }
 
 export interface SelectedRecipe {

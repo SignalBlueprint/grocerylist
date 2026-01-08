@@ -1,5 +1,6 @@
-import { GroceryItem } from '@/types';
+import { GroceryItem, Recipe, DietaryBadge } from '@/types';
 import { groupByCategory, exportAsText } from './merge-engine';
+import { detectDietaryBadges, getBadgeInfo } from './dietary-utils';
 
 /**
  * Compresses grocery list data for URL sharing
@@ -134,4 +135,66 @@ export function generateQRCodeUrl(data: string): string {
   // Using a free QR code API - for production, consider self-hosting
   const encoded = encodeURIComponent(data);
   return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encoded}`;
+}
+
+/**
+ * Gets dietary badges that are common to ALL recipes in the list
+ */
+export function getCommonDietaryBadges(recipes: Recipe[]): DietaryBadge[] {
+  if (recipes.length === 0) return [];
+
+  // Get badges for each recipe
+  const allBadges = recipes.map(recipe => new Set(detectDietaryBadges(recipe.ingredients)));
+
+  // Find intersection of all badge sets
+  const firstBadges = allBadges[0];
+  const commonBadges: DietaryBadge[] = [];
+
+  firstBadges.forEach(badge => {
+    if (allBadges.every(badges => badges.has(badge))) {
+      commonBadges.push(badge);
+    }
+  });
+
+  return commonBadges;
+}
+
+/**
+ * Generates a share title with dietary information
+ */
+export function generateShareTitle(recipes: Recipe[], itemCount: number): string {
+  const commonBadges = getCommonDietaryBadges(recipes);
+
+  let title = `Grocery List (${itemCount} items)`;
+
+  if (commonBadges.length > 0) {
+    // Show most relevant dietary badges (max 2)
+    const displayBadges = commonBadges.slice(0, 2);
+    const badgeLabels = displayBadges.map(badge => getBadgeInfo(badge).label);
+    title = `${badgeLabels.join(' & ')} ${title}`;
+  }
+
+  return title;
+}
+
+/**
+ * Generates share text with dietary summary and recipe list
+ */
+export function generateShareText(recipes: Recipe[], itemCount: number): string {
+  const commonBadges = getCommonDietaryBadges(recipes);
+  const title = generateShareTitle(recipes, itemCount);
+
+  let text = title + '\n';
+
+  if (commonBadges.length > 0) {
+    const badgeIcons = commonBadges.map(badge => getBadgeInfo(badge).icon).join(' ');
+    text += badgeIcons + '\n';
+  }
+
+  text += '\nRecipes:\n';
+  recipes.forEach(recipe => {
+    text += `- ${recipe.name}\n`;
+  });
+
+  return text;
 }

@@ -1,14 +1,17 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Recipe, SelectedRecipe } from '@/types';
+import { Recipe, SelectedRecipe, DietaryBadge } from '@/types';
 import { RecipeCard } from './RecipeCard';
+import { detectDietaryBadges, getBadgeInfo } from '@/lib/dietary-utils';
 
 interface RecipeListProps {
   recipes: Recipe[];
   selectedRecipes: SelectedRecipe[];
   onSelectRecipe: (recipeId: string) => void;
 }
+
+const DIETARY_FILTERS: DietaryBadge[] = ['vegetarian', 'vegan', 'gluten-free', 'dairy-free', 'nut-free'];
 
 export function RecipeList({
   recipes,
@@ -17,6 +20,7 @@ export function RecipeList({
 }: RecipeListProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTag, setSelectedTag] = useState<string>('');
+  const [selectedDietary, setSelectedDietary] = useState<DietaryBadge | null>(null);
 
   // Get all unique tags
   const allTags = useMemo(() => {
@@ -34,7 +38,33 @@ export function RecipeList({
     return Array.from(cuisines).sort();
   }, [recipes]);
 
-  // Filter recipes based on search and tag
+  // Pre-compute dietary badges for all recipes
+  const recipeDietaryBadges = useMemo(() => {
+    const badgeMap = new Map<string, DietaryBadge[]>();
+    recipes.forEach((recipe) => {
+      badgeMap.set(recipe.id, detectDietaryBadges(recipe.ingredients));
+    });
+    return badgeMap;
+  }, [recipes]);
+
+  // Count recipes per dietary badge
+  const dietaryCounts = useMemo(() => {
+    const counts: Record<DietaryBadge, number> = {
+      'vegetarian': 0,
+      'vegan': 0,
+      'gluten-free': 0,
+      'dairy-free': 0,
+      'nut-free': 0,
+    };
+    recipeDietaryBadges.forEach((badges) => {
+      badges.forEach((badge) => {
+        counts[badge]++;
+      });
+    });
+    return counts;
+  }, [recipeDietaryBadges]);
+
+  // Filter recipes based on search, tag, and dietary
   const filteredRecipes = useMemo(() => {
     return recipes.filter((recipe) => {
       const matchesSearch =
@@ -50,9 +80,13 @@ export function RecipeList({
         recipe.tags.includes(selectedTag) ||
         recipe.cuisine === selectedTag;
 
-      return matchesSearch && matchesTag;
+      const matchesDietary =
+        selectedDietary === null ||
+        recipeDietaryBadges.get(recipe.id)?.includes(selectedDietary);
+
+      return matchesSearch && matchesTag && matchesDietary;
     });
-  }, [recipes, searchQuery, selectedTag]);
+  }, [recipes, searchQuery, selectedTag, selectedDietary, recipeDietaryBadges]);
 
   const selectedIds = new Set(selectedRecipes.map((sr) => sr.recipeId));
 
@@ -91,6 +125,32 @@ export function RecipeList({
               {cuisine}
             </button>
           ))}
+        </div>
+        {/* Dietary Filters */}
+        <div className="flex flex-wrap gap-1.5">
+          {DIETARY_FILTERS.map((badge) => {
+            const info = getBadgeInfo(badge);
+            const count = dietaryCounts[badge];
+            const isSelected = selectedDietary === badge;
+            return (
+              <button
+                key={badge}
+                onClick={() => setSelectedDietary(isSelected ? null : badge)}
+                className={`px-2 py-1 text-xs rounded-full transition-colors flex items-center gap-1 ${
+                  isSelected
+                    ? info.color
+                    : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                }`}
+                title={`Show ${info.label.toLowerCase()} recipes`}
+              >
+                <span>{info.icon}</span>
+                <span>{info.label}</span>
+                <span className={`ml-0.5 ${isSelected ? 'opacity-80' : 'text-gray-400'}`}>
+                  ({count})
+                </span>
+              </button>
+            );
+          })}
         </div>
         <div className="flex flex-wrap gap-1">
           {allTags.map((tag) => (
