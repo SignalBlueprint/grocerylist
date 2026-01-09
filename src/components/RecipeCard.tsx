@@ -1,6 +1,9 @@
 'use client';
 
+import { useMemo } from 'react';
 import { Recipe } from '@/types';
+import { detectDietaryBadges } from '@/lib/dietary-utils';
+import { DietaryBadgeList } from './DietaryBadge';
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -21,6 +24,12 @@ export function RecipeCard({
 }: RecipeCardProps) {
   const currentServings = servings ?? recipe.servingsBase;
 
+  // Compute dietary badges from ingredients
+  const dietaryBadges = useMemo(
+    () => detectDietaryBadges(recipe.ingredients),
+    [recipe.ingredients]
+  );
+
   if (isSelected && onRemove && onServingsChange) {
     // Selected recipe card view
     return (
@@ -29,6 +38,11 @@ export function RecipeCard({
           <div>
             <h3 className="font-medium text-gray-900">{recipe.name}</h3>
             <p className="text-sm text-gray-500">{recipe.cuisine}</p>
+            {dietaryBadges.length > 0 && (
+              <div className="mt-1">
+                <DietaryBadgeList badges={dietaryBadges} maxDisplay={3} />
+              </div>
+            )}
           </div>
           <button
             onClick={onRemove}
@@ -86,6 +100,11 @@ export function RecipeCard({
           </span>
         )}
       </div>
+      {dietaryBadges.length > 0 && (
+        <div className="mt-2">
+          <DietaryBadgeList badges={dietaryBadges} maxDisplay={4} />
+        </div>
+      )}
       <div className="flex flex-wrap gap-1 mt-2">
         {recipe.tags.map((tag) => (
           <span

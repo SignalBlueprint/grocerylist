@@ -6,6 +6,11 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useUndoRedo } from '@/hooks/useUndoRedo';
 import { scaleIngredients, mergeIngredients } from '@/lib/merge-engine';
 import { parseShareUrl } from '@/lib/share';
+import {
+  STORE_MODE_STORAGE_KEY,
+  loadStoreModePreference,
+  saveStoreModePreference,
+} from '@/lib/store-mode';
 import { RecipeList } from '@/components/RecipeList';
 import { SelectedRecipes } from '@/components/SelectedRecipes';
 import { GroceryList } from '@/components/GroceryList';
@@ -41,6 +46,22 @@ export default function Home() {
   const [showShareModal, setShowShareModal] = useState(false);
   const [showRecipeManager, setShowRecipeManager] = useState(false);
   const [editingRecipe, setEditingRecipe] = useState<Recipe | null>(null);
+  const [storeMode, setStoreMode] = useState(false);
+
+  // Load store mode preference from localStorage on mount
+  useEffect(() => {
+    const savedPreference = loadStoreModePreference();
+    setStoreMode(savedPreference);
+  }, []);
+
+  // Handle store mode toggle
+  const handleToggleStoreMode = useCallback(() => {
+    setStoreMode((prev) => {
+      const newValue = !prev;
+      saveStoreModePreference(newValue);
+      return newValue;
+    });
+  }, []);
 
   // Combine default and custom recipes
   const allRecipes = useMemo(
@@ -442,6 +463,8 @@ export default function Home() {
                 onDeleteItem={handleDeleteItem}
                 onAddItem={handleAddItem}
                 onReset={handleReset}
+                storeMode={storeMode}
+                onToggleStoreMode={handleToggleStoreMode}
               />
             </div>
           )}
