@@ -83,6 +83,8 @@ export function RecipeCard({
   return (
     <button
       onClick={onSelect}
+      data-testid={`recipe-card-${recipe.id}`}
+      data-recipe-card
       className={`w-full text-left p-4 rounded-lg border transition-all ${
         isSelected
           ? 'border-blue-500 bg-blue-50'

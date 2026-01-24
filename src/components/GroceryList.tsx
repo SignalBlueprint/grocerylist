@@ -380,6 +380,8 @@ export function GroceryList({
                   {categoryItems.map((item) => (
                     <div
                       key={item.id}
+                      data-testid={`grocery-item-${item.id}`}
+                      data-grocery-item
                       className={`px-4 py-3 flex items-center gap-3 transition-all duration-300 ${
                         item.checked
                           ? storeMode
