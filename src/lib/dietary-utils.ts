@@ -230,32 +230,58 @@ export function detectDietaryBadges(ingredients: Ingredient[]): DietaryBadge[] {
 
 /**
  * Configuration for badge display
+ * Updated to use Fresh Market design system colors
  */
-export const BADGE_CONFIG: Record<DietaryBadge, { label: string; color: string; icon: string }> = {
+export const BADGE_CONFIG: Record<DietaryBadge, { label: string; color: string; icon: string; customStyle?: Record<string, string> }> = {
   'vegetarian': {
     label: 'Vegetarian',
-    color: 'bg-green-100 text-green-800',
+    color: 'badge-vegetarian',
     icon: '🌿',
+    customStyle: {
+      background: 'rgba(107, 143, 113, 0.12)',
+      color: 'var(--color-sage-dark)',
+      borderColor: 'var(--color-sage-light)',
+    },
   },
   'vegan': {
     label: 'Vegan',
-    color: 'bg-emerald-100 text-emerald-800',
+    color: 'badge-vegan',
     icon: '🌱',
+    customStyle: {
+      background: 'rgba(82, 200, 147, 0.12)',
+      color: 'var(--color-mint)',
+      borderColor: 'var(--color-mint)',
+    },
   },
   'gluten-free': {
     label: 'Gluten-Free',
-    color: 'bg-amber-100 text-amber-800',
+    color: 'badge-gluten-free',
     icon: '🌾',
+    customStyle: {
+      background: 'rgba(244, 184, 96, 0.12)',
+      color: 'var(--color-honey-dark)',
+      borderColor: 'var(--color-honey)',
+    },
   },
   'dairy-free': {
     label: 'Dairy-Free',
-    color: 'bg-blue-100 text-blue-800',
+    color: 'badge-dairy-free',
     icon: '🥛',
+    customStyle: {
+      background: 'rgba(138, 170, 143, 0.12)',
+      color: 'var(--color-sage)',
+      borderColor: 'var(--color-sage-light)',
+    },
   },
   'nut-free': {
     label: 'Nut-Free',
-    color: 'bg-orange-100 text-orange-800',
+    color: 'badge-nut-free',
     icon: '🥜',
+    customStyle: {
+      background: 'rgba(217, 119, 87, 0.12)',
+      color: 'var(--color-terracotta-dark)',
+      borderColor: 'var(--color-terracotta)',
+    },
   },
 };
 

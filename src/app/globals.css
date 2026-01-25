@@ -1,19 +1,206 @@
 @import "tailwindcss";
 
+/* ============================================
+   FRESH MARKET DESIGN SYSTEM
+   A warm, approachable design for home cooks
+   ============================================ */
+
 :root {
-  --background: #f9fafb;
-  --foreground: #111827;
+  /* Base Colors */
+  --background: #FDFAF7;
+  --foreground: #2C3E38;
+
+  /* Brand Colors */
+  --color-sage: #6B8F71;
+  --color-sage-light: #8AAA8F;
+  --color-sage-dark: #4A6B52;
+  --color-terracotta: #D97757;
+  --color-terracotta-light: #E69B7F;
+  --color-terracotta-dark: #C2593A;
+  --color-honey: #F4B860;
+  --color-honey-light: #F7CA85;
+  --color-honey-dark: #E1A03D;
+  --color-mint: #52C893;
+
+  /* Neutral Palette */
+  --color-neutral-50: #F9F7F4;
+  --color-neutral-100: #F3F0EB;
+  --color-neutral-200: #E5E0D8;
+  --color-neutral-300: #CCC5B8;
+  --color-neutral-400: #9A9184;
+  --color-neutral-500: #6B645A;
+  --color-neutral-600: #4A4540;
+  --color-neutral-700: #35322E;
+  --color-neutral-800: #26241F;
+  --color-neutral-900: #1C1A16;
+
+  /* Semantic Colors */
+  --color-success: #52C893;
+  --color-warning: #F4B860;
+  --color-error: #D97757;
+  --color-info: #6B8F71;
+
+  /* Dietary Badge Colors */
+  --color-vegan: #52C893;
+  --color-vegetarian: #6B8F71;
+  --color-gluten-free: #F4B860;
+  --color-dairy-free: #8AAA8F;
+  --color-nut-free: #D97757;
+
+  /* Spacing Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 2px 8px -2px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 8px 16px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 12px 24px -6px rgb(0 0 0 / 0.12);
+
+  /* Typography */
+  --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: system-ui, -apple-system, sans-serif;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
 }
 
 .dark {
-  --background: #111827;
-  --foreground: #f9fafb;
+  --background: #1C1A16;
+  --foreground: #F9F7F4;
+
+  /* Adjust brand colors for dark mode */
+  --color-sage: #8AAA8F;
+  --color-sage-light: #A5BFAA;
+  --color-sage-dark: #6B8F71;
+  --color-terracotta: #E69B7F;
+  --color-terracotta-light: #F0B39D;
+  --color-terracotta-dark: #D97757;
+  --color-honey: #F7CA85;
+  --color-honey-light: #FAD9A3;
+  --color-honey-dark: #F4B860;
+
+  /* Dark neutral palette */
+  --color-neutral-50: #26241F;
+  --color-neutral-100: #35322E;
+  --color-neutral-200: #4A4540;
+  --color-neutral-300: #6B645A;
+  --color-neutral-400: #9A9184;
+  --color-neutral-500: #CCC5B8;
+  --color-neutral-600: #E5E0D8;
+  --color-neutral-700: #F3F0EB;
+  --color-neutral-800: #F9F7F4;
+  --color-neutral-900: #FDFAF7;
+
+  /* Shadows for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.2);
+  --shadow-md: 0 2px 8px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 8px 16px -4px rgb(0 0 0 / 0.4);
+  --shadow-xl: 0 12px 24px -6px rgb(0 0 0 / 0.5);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+/* Custom Button Styles */
+.btn-primary {
+  background: var(--color-sage);
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-lg);
+  font-weight: 500;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background: var(--color-sage-dark);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--color-terracotta);
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-lg);
+  font-weight: 500;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+  background: var(--color-terracotta-dark);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-neutral-600);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  transition: all var(--transition-fast);
+}
+
+.btn-ghost:hover {
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-800);
+}
+
+/* Card Styles */
+.card {
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-neutral-200);
+  transition: all var(--transition-base);
+}
+
+.dark .card {
+  background: var(--color-neutral-100);
+  border-color: var(--color-neutral-200);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card-interactive {
+  cursor: pointer;
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-sage-light);
 }
 
 /* Smooth transitions for theme changes */
@@ -24,8 +211,11 @@ body,
 .border-gray-200,
 .text-gray-900,
 .text-gray-600,
-.text-gray-500 {
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+.text-gray-500,
+.card {
+  transition: background-color var(--transition-base),
+              color var(--transition-base),
+              border-color var(--transition-base);
 }
 
 /* Touch-friendly targets for mobile */
@@ -89,8 +279,9 @@ body,
 
 /* Focus visible styles for accessibility */
 :focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--color-sage);
   outline-offset: 2px;
+  border-radius: var(--radius-sm);
 }
 
 /* Skip link for keyboard navigation */
@@ -98,14 +289,17 @@ body,
   position: absolute;
   top: -40px;
   left: 0;
-  background: #2563eb;
+  background: var(--color-sage);
   color: white;
-  padding: 8px;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
   z-index: 100;
+  font-weight: 500;
 }
 
 .skip-link:focus {
-  top: 0;
+  top: var(--space-sm);
+  left: var(--space-sm);
 }
 
 /* Screen reader only */

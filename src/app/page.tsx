@@ -258,19 +258,36 @@ function HomeContent() {
         Skip to main content
       </a>
 
-      <main id="main-content" className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-10">
+      <main id="main-content" className="min-h-screen" style={{ background: 'var(--background)' }}>
+        <header className="sticky top-0 z-10 border-b" style={{
+          background: 'white',
+          borderColor: 'var(--color-neutral-200)',
+          boxShadow: 'var(--shadow-sm)'
+        }}>
           <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-              Grocery List Generator
-            </h1>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center w-10 h-10 rounded-lg" style={{
+                background: 'linear-gradient(135deg, var(--color-sage) 0%, var(--color-sage-dark) 100%)',
+                boxShadow: 'var(--shadow-sm)'
+              }}>
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg>
+              </div>
+              <h1 className="text-xl font-bold" style={{
+                color: 'var(--foreground)',
+                fontFamily: 'var(--font-heading)'
+              }}>
+                Fresh Market
+              </h1>
+            </div>
             <div className="flex items-center gap-2">
               {view === 'list' && groceryListState.length > 0 && (
                 <>
                   <button
                     onClick={undo}
                     disabled={!canUndo}
-                    className="p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="btn-ghost disabled:opacity-50 disabled:cursor-not-allowed"
                     aria-label="Undo"
                     title="Undo (Ctrl+Z)"
                   >
@@ -281,7 +298,7 @@ function HomeContent() {
                   <button
                     onClick={redo}
                     disabled={!canRedo}
-                    className="p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="btn-ghost disabled:opacity-50 disabled:cursor-not-allowed"
                     aria-label="Redo"
                     title="Redo (Ctrl+Shift+Z)"
                   >
@@ -291,7 +308,7 @@ function HomeContent() {
                   </button>
                   <button
                     onClick={() => setShowShareModal(true)}
-                    className="p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                    className="btn-ghost"
                     aria-label="Share list"
                     title="Share"
                   >
@@ -299,17 +316,14 @@ function HomeContent() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                     </svg>
                   </button>
-                  <div className="w-px h-6 bg-gray-300 dark:bg-gray-600" />
+                  <div className="w-px h-6" style={{ background: 'var(--color-neutral-300)' }} />
                 </>
               )}
               <ThemeToggle />
               <button
                 onClick={() => setView('recipes')}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  view === 'recipes'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-                }`}
+                className={view === 'recipes' ? 'btn-primary' : 'btn-ghost'}
+                style={view === 'recipes' ? {} : { fontWeight: 500 }}
                 aria-pressed={view === 'recipes'}
               >
                 Recipes
@@ -317,14 +331,16 @@ function HomeContent() {
               <button
                 onClick={() => setView('list')}
                 disabled={groceryListState.length === 0}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  view === 'list'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-                } disabled:opacity-50 disabled:cursor-not-allowed`}
+                className={view === 'list' ? 'btn-primary' : 'btn-ghost'}
+                style={view === 'list' ? {} : { fontWeight: 500 }}
                 aria-pressed={view === 'list'}
               >
-                List ({groceryListState.length})
+                <span className="flex items-center gap-1.5">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                  List {groceryListState.length > 0 ? `(${groceryListState.length})` : ''}
+                </span>
               </button>
             </div>
           </div>
@@ -334,9 +350,12 @@ function HomeContent() {
           {view === 'recipes' ? (
             <>
               <div className="hidden md:grid md:grid-cols-2 gap-6 h-[calc(100vh-140px)]">
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 overflow-hidden flex flex-col">
+                <div className="card overflow-hidden flex flex-col" style={{ padding: 'var(--space-lg)' }}>
                   <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    <h2 className="text-lg font-semibold" style={{
+                      color: 'var(--foreground)',
+                      fontFamily: 'var(--font-heading)'
+                    }}>
                       Recipe Library
                     </h2>
                     <div className="flex items-center gap-2">
@@ -349,13 +368,14 @@ function HomeContent() {
                           setEditingRecipe(null);
                           setShowRecipeManager(true);
                         }}
-                        className="px-3 py-1.5 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 flex items-center gap-1"
+                        className="btn-secondary flex items-center gap-1.5 text-sm"
+                        style={{ padding: 'var(--space-sm) var(--space-md)' }}
                         aria-label="Create new recipe"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                         </svg>
-                        New
+                        New Recipe
                       </button>
                     </div>
                   </div>
@@ -365,7 +385,7 @@ function HomeContent() {
                     onSelectRecipe={handleSelectRecipe}
                   />
                 </div>
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 overflow-hidden flex flex-col">
+                <div className="card overflow-hidden flex flex-col" style={{ padding: 'var(--space-lg)' }}>
                   <SelectedRecipes
                     recipes={allRecipes}
                     selectedRecipes={selectedRecipes}
@@ -377,7 +397,7 @@ function HomeContent() {
               </div>
 
               <div className="md:hidden">
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 mb-4">
+                <div className="card mb-4" style={{ padding: 'var(--space-lg)' }}>
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                       Recipe Library
@@ -405,10 +425,21 @@ function HomeContent() {
                 {selectedRecipes.length > 0 && (
                   <button
                     onClick={() => setMobileDrawerOpen(true)}
-                    className="fixed bottom-4 left-4 right-4 py-4 bg-green-600 text-white font-medium rounded-xl shadow-lg z-20 touch-target"
+                    className="btn-primary fixed bottom-4 left-4 right-4 touch-target"
+                    style={{
+                      padding: 'var(--space-lg)',
+                      boxShadow: 'var(--shadow-xl)',
+                      zIndex: 20,
+                      fontWeight: 600
+                    }}
                     aria-label={`View ${selectedRecipes.length} selected recipes and generate list`}
                   >
-                    View Selected ({selectedRecipes.length}) & Generate List
+                    <span className="flex items-center justify-center gap-2">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                      </svg>
+                      View Selected ({selectedRecipes.length})
+                    </span>
                   </button>
                 )}
 
@@ -441,10 +472,15 @@ function HomeContent() {
               </div>
             </>
           ) : (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 md:p-6 min-h-[calc(100vh-140px)]">
+            <div className="card min-h-[calc(100vh-140px)]" style={{ padding: 'var(--space-lg) var(--space-xl)' }}>
               <button
                 onClick={() => setView('recipes')}
-                className="mb-4 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium flex items-center gap-1"
+                className="mb-4 font-medium flex items-center gap-1.5 btn-ghost"
+                style={{
+                  color: 'var(--color-sage)',
+                  padding: 'var(--space-sm) var(--space-md)',
+                  marginLeft: 'calc(-1 * var(--space-md))'
+                }}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

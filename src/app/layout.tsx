@@ -3,13 +3,13 @@ import "./globals.css";
 import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 
 export const metadata: Metadata = {
-  title: "Grocery List Generator",
-  description: "Generate grocery lists from your favorite recipes",
+  title: "Fresh Market - Grocery List Generator",
+  description: "Transform recipe selections into smart grocery lists with intelligent merging and store-optimized shopping",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Grocery List",
+    title: "Fresh Market",
   },
   formatDetection: {
     telephone: false,
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#2563eb" },
-    { media: "(prefers-color-scheme: dark)", color: "#1e40af" },
+    { media: "(prefers-color-scheme: light)", color: "#6B8F71" },
+    { media: "(prefers-color-scheme: dark)", color: "#8AAA8F" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -34,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
+      <body className="antialiased transition-colors">
         <ServiceWorkerRegistration />
         {children}
       </body>

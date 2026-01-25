@@ -6,6 +6,66 @@ status: draft
 
 # Grocery List Generator Vision
 
+## Design System: "Fresh Market"
+
+**Updated:** 2026-01-25
+
+The application now features a cohesive design system called "Fresh Market" that reflects the product's warm, approachable personality for home cooks and families.
+
+### Design Philosophy
+
+- **Warmth over sterility**: Soft, natural colors inspired by fresh ingredients
+- **Clarity in action**: High contrast for interactive elements and shopping mode
+- **Tactile feedback**: Rounded corners and subtle shadows that feel touchable
+- **Progressive disclosure**: Information revealed when needed, not overwhelming
+
+### Color Palette
+
+**Brand Colors:**
+- **Sage Green** (#6B8F71): Primary color representing fresh produce and calm efficiency
+- **Terracotta** (#D97757): Secondary color for warmth and home cooking
+- **Honey Gold** (#F4B860): Accent color for cheerful highlights
+- **Fresh Mint** (#52C893): Success state for shopping mode completion
+
+**Neutral Palette:**
+- Warm grays (#F9F7F4 to #1C1A16) with slight beige tint for comfortable reading
+- Designed for both light and dark modes with adjusted brightness
+
+**Semantic Colors:**
+- Dietary badges use the brand palette for consistency
+- Interactive elements use sage green for primary actions
+- Terracotta for destructive or warning actions
+
+### Typography
+
+- **Headings**: Inter font family (modern, readable, friendly)
+- **Body**: System fonts for optimal performance
+- **Scale**: 14px base with clear hierarchy
+- **Weight**: Medium (500) for buttons, Semibold (600) for headings
+
+### Spacing & Layout
+
+- Consistent spacing scale: xs (0.25rem) to 2xl (3rem)
+- Border radius: sm (0.375rem) to full (9999px) for pill shapes
+- Shadows: Four-level system from subtle (sm) to prominent (xl)
+- Card-based layout with soft shadows and gentle hover states
+
+### Component Patterns
+
+**Cards**: Rounded corners (0.75-1rem), subtle borders, hover lift effect
+**Buttons**: Three variants (primary sage, secondary terracotta, ghost neutral)
+**Badges**: Pill-shaped with icon + label, color-coded by category
+**Progress**: Gradient backgrounds with smooth animations
+**Forms**: Clean inputs with focus states matching brand colors
+
+### Accessibility
+
+- WCAG AA compliant color contrasts
+- Focus states with 2px sage outline
+- Skip navigation link for keyboard users
+- Touch targets 44x44px minimum on mobile
+- Screen reader support throughout
+
 ## What It Is
 
 A local-first web app that transforms recipe selections into smart grocery lists with intelligent merging, dietary filtering, and store-optimized shopping flows. Users browse recipes, adjust servings, and generate consolidated shopping lists where ingredients are automatically combined ("2 cloves garlic" + "4 cloves garlic" = "6 cloves garlic"). Everything runs client-side with localStorage persistence - no backend required.

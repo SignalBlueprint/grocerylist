@@ -12,14 +12,21 @@ interface DietaryBadgeProps {
 export function DietaryBadge({ badge, showLabel = false, size = 'sm' }: DietaryBadgeProps) {
   const info = getBadgeInfo(badge);
 
-  const sizeClasses = {
-    sm: 'text-xs px-1.5 py-0.5',
-    md: 'text-sm px-2 py-1',
+  const sizePadding = {
+    sm: { padding: '0.25rem 0.5rem', fontSize: '0.75rem' },
+    md: { padding: '0.375rem 0.625rem', fontSize: '0.875rem' },
   };
 
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-full font-medium ${info.color} ${sizeClasses[size]}`}
+      className="inline-flex items-center gap-1 font-medium"
+      style={{
+        ...sizePadding[size],
+        ...info.customStyle,
+        borderRadius: 'var(--radius-full)',
+        border: '1px solid',
+        lineHeight: 1.2,
+      }}
       title={info.label}
     >
       <span className="leading-none">{info.icon}</span>
@@ -52,7 +59,9 @@ export function DietaryBadgeList({
         <DietaryBadge key={badge} badge={badge} showLabel={showLabels} size={size} />
       ))}
       {remainingCount > 0 && (
-        <span className="text-xs text-gray-500">+{remainingCount}</span>
+        <span className="text-xs" style={{ color: 'var(--color-neutral-500)' }}>
+          +{remainingCount}
+        </span>
       )}
     </div>
   );

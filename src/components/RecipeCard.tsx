@@ -33,20 +33,32 @@ export function RecipeCard({
   if (isSelected && onRemove && onServingsChange) {
     // Selected recipe card view
     return (
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+      <div className="card" style={{ padding: 'var(--space-lg)' }}>
         <div className="flex justify-between items-start mb-2">
-          <div>
-            <h3 className="font-medium text-gray-900">{recipe.name}</h3>
-            <p className="text-sm text-gray-500">{recipe.cuisine}</p>
+          <div className="flex-1">
+            <h3 className="font-medium" style={{
+              color: 'var(--foreground)',
+              fontSize: '1rem',
+              marginBottom: 'var(--space-xs)'
+            }}>
+              {recipe.name}
+            </h3>
+            <p className="text-sm" style={{ color: 'var(--color-neutral-500)' }}>
+              {recipe.cuisine}
+            </p>
             {dietaryBadges.length > 0 && (
-              <div className="mt-1">
+              <div className="mt-2">
                 <DietaryBadgeList badges={dietaryBadges} maxDisplay={3} />
               </div>
             )}
           </div>
           <button
             onClick={onRemove}
-            className="text-gray-400 hover:text-red-500 transition-colors"
+            className="btn-ghost p-1 ml-2"
+            style={{
+              color: 'var(--color-neutral-400)',
+              borderRadius: 'var(--radius-md)'
+            }}
             aria-label="Remove recipe"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,25 +66,48 @@ export function RecipeCard({
             </svg>
           </button>
         </div>
-        <div className="flex items-center gap-2 mt-3">
-          <label className="text-sm text-gray-600">Servings:</label>
-          <button
-            onClick={() => onServingsChange(Math.max(1, currentServings - 1))}
-            className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
-            aria-label="Decrease servings"
-          >
-            -
-          </button>
-          <span className="w-8 text-center font-medium">{currentServings}</span>
-          <button
-            onClick={() => onServingsChange(currentServings + 1)}
-            className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
-            aria-label="Increase servings"
-          >
-            +
-          </button>
-          <span className="text-xs text-gray-400 ml-2">
-            (base: {recipe.servingsBase})
+        <div className="flex items-center gap-3 mt-4 pt-3" style={{
+          borderTop: '1px solid var(--color-neutral-200)'
+        }}>
+          <label className="text-sm font-medium" style={{ color: 'var(--color-neutral-600)' }}>
+            Servings:
+          </label>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => onServingsChange(Math.max(1, currentServings - 1))}
+              className="w-8 h-8 flex items-center justify-center font-medium"
+              style={{
+                borderRadius: 'var(--radius-full)',
+                background: 'var(--color-neutral-100)',
+                color: 'var(--color-sage)',
+                transition: 'all var(--transition-fast)'
+              }}
+              aria-label="Decrease servings"
+            >
+              −
+            </button>
+            <span className="w-10 text-center font-semibold" style={{
+              fontSize: '1.125rem',
+              color: 'var(--foreground)'
+            }}>
+              {currentServings}
+            </span>
+            <button
+              onClick={() => onServingsChange(currentServings + 1)}
+              className="w-8 h-8 flex items-center justify-center font-medium"
+              style={{
+                borderRadius: 'var(--radius-full)',
+                background: 'var(--color-neutral-100)',
+                color: 'var(--color-sage)',
+                transition: 'all var(--transition-fast)'
+              }}
+              aria-label="Increase servings"
+            >
+              +
+            </button>
+          </div>
+          <span className="text-xs ml-auto" style={{ color: 'var(--color-neutral-400)' }}>
+            base: {recipe.servingsBase}
           </span>
         </div>
       </div>
@@ -85,41 +120,80 @@ export function RecipeCard({
       onClick={onSelect}
       data-testid={`recipe-card-${recipe.id}`}
       data-recipe-card
-      className={`w-full text-left p-4 rounded-lg border transition-all ${
-        isSelected
-          ? 'border-blue-500 bg-blue-50'
-          : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'
-      }`}
+      className={`card card-interactive w-full text-left ${isSelected ? 'selected' : ''}`}
+      style={{
+        padding: 'var(--space-lg)',
+        border: isSelected ? '2px solid var(--color-sage)' : '1px solid var(--color-neutral-200)',
+        background: isSelected ? 'var(--color-neutral-50)' : 'white'
+      }}
     >
-      <div className="flex justify-between items-start">
-        <div>
-          <h3 className="font-medium text-gray-900">{recipe.name}</h3>
-          <p className="text-sm text-gray-500">{recipe.cuisine}</p>
+      <div className="flex justify-between items-start gap-3">
+        <div className="flex-1 min-w-0">
+          <h3 className="font-semibold truncate" style={{
+            color: 'var(--foreground)',
+            fontSize: '1rem',
+            marginBottom: 'var(--space-xs)',
+            fontFamily: 'var(--font-heading)'
+          }}>
+            {recipe.name}
+          </h3>
+          <p className="text-sm" style={{ color: 'var(--color-neutral-500)' }}>
+            {recipe.cuisine}
+          </p>
         </div>
         {isSelected && (
-          <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded">
-            Selected
+          <span className="text-xs px-2.5 py-1 font-medium whitespace-nowrap" style={{
+            background: 'var(--color-sage)',
+            color: 'white',
+            borderRadius: 'var(--radius-full)',
+            boxShadow: 'var(--shadow-sm)'
+          }}>
+            ✓ Selected
           </span>
         )}
       </div>
       {dietaryBadges.length > 0 && (
-        <div className="mt-2">
+        <div className="mt-3">
           <DietaryBadgeList badges={dietaryBadges} maxDisplay={4} />
         </div>
       )}
-      <div className="flex flex-wrap gap-1 mt-2">
-        {recipe.tags.map((tag) => (
-          <span
-            key={tag}
-            className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded"
-          >
-            {tag}
-          </span>
-        ))}
+      {recipe.tags.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mt-3">
+          {recipe.tags.map((tag) => (
+            <span
+              key={tag}
+              className="text-xs px-2 py-1"
+              style={{
+                background: 'var(--color-neutral-100)',
+                color: 'var(--color-neutral-600)',
+                borderRadius: 'var(--radius-sm)',
+                fontWeight: 500
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+      <div className="flex items-center gap-3 mt-3 pt-3" style={{
+        borderTop: '1px solid var(--color-neutral-200)',
+        fontSize: '0.8125rem',
+        color: 'var(--color-neutral-500)'
+      }}>
+        <span className="flex items-center gap-1">
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          {recipe.servingsBase}
+        </span>
+        <span style={{ color: 'var(--color-neutral-300)' }}>•</span>
+        <span className="flex items-center gap-1">
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+          {recipe.ingredients.length} items
+        </span>
       </div>
-      <p className="text-xs text-gray-400 mt-2">
-        {recipe.servingsBase} servings • {recipe.ingredients.length} ingredients
-      </p>
     </button>
   );
 }

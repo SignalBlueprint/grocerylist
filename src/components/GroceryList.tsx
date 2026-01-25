@@ -189,27 +189,42 @@ export function GroceryList({
 
       {/* Store Mode Progress Header */}
       {storeMode && totalCount > 0 && (
-        <div className="sticky top-0 z-10 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg p-4 mb-4 shadow-lg">
-          <div className="flex items-center justify-between mb-2">
+        <div
+          className="sticky top-0 z-10 text-white mb-4"
+          style={{
+            background: 'linear-gradient(135deg, var(--color-mint) 0%, var(--color-sage) 100%)',
+            borderRadius: 'var(--radius-xl)',
+            padding: 'var(--space-lg)',
+            boxShadow: 'var(--shadow-lg)'
+          }}
+        >
+          <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
-              <span className="font-semibold">Shopping Mode</span>
+              <span className="font-semibold text-white" style={{ fontFamily: 'var(--font-heading)' }}>
+                Shopping Mode
+              </span>
             </div>
             <span className="text-lg font-bold">
-              {remainingCount} of {totalCount} remaining
+              {remainingCount} of {totalCount}
             </span>
           </div>
-          <div className="w-full bg-white/30 rounded-full h-3">
+          <div className="w-full rounded-full h-3" style={{ background: 'rgba(255, 255, 255, 0.25)' }}>
             <div
-              className="bg-white rounded-full h-3 transition-all duration-500 ease-out"
-              style={{ width: `${progressPercent}%` }}
+              className="rounded-full h-3"
+              style={{
+                background: 'white',
+                width: `${progressPercent}%`,
+                transition: 'width 500ms cubic-bezier(0.4, 0, 0.2, 1)',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+              }}
             />
           </div>
           {remainingCount === 0 && (
-            <p className="text-center mt-2 text-sm font-medium animate-pulse">
-              All done! Great shopping trip!
+            <p className="text-center mt-3 text-sm font-medium animate-pulse text-white">
+              ✓ All done! Great shopping trip!
             </p>
           )}
         </div>
@@ -218,8 +233,13 @@ export function GroceryList({
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h2 className="text-lg font-semibold text-gray-900">Grocery List</h2>
-          <p className="text-sm text-gray-500">
+          <h2 className="text-lg font-semibold" style={{
+            color: 'var(--foreground)',
+            fontFamily: 'var(--font-heading)'
+          }}>
+            Grocery List
+          </h2>
+          <p className="text-sm" style={{ color: 'var(--color-neutral-500)' }}>
             {checkedCount}/{items.length} items checked
           </p>
         </div>
@@ -230,7 +250,7 @@ export function GroceryList({
           )}
           <button
             onClick={handleCopyToClipboard}
-            className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            className="btn-ghost p-2"
             title="Copy to clipboard"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -239,7 +259,7 @@ export function GroceryList({
           </button>
           <button
             onClick={handleDownload}
-            className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            className="btn-ghost p-2"
             title="Download as .txt"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -248,7 +268,7 @@ export function GroceryList({
           </button>
           <button
             onClick={handlePrint}
-            className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+            className="btn-ghost p-2"
             title="Print-friendly view"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -257,7 +277,8 @@ export function GroceryList({
           </button>
           <button
             onClick={onReset}
-            className="p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
+            className="btn-ghost p-2"
+            style={{ color: 'var(--color-terracotta)' }}
             title="Reset all"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -271,15 +292,29 @@ export function GroceryList({
       {!showAddForm && (
         <button
           onClick={() => setShowAddForm(true)}
-          className="mb-4 w-full py-2 border-2 border-dashed border-gray-300 text-gray-500 rounded-lg hover:border-gray-400 hover:text-gray-600 transition-colors"
+          className="mb-4 w-full py-3 border-2 border-dashed font-medium"
+          style={{
+            borderColor: 'var(--color-neutral-300)',
+            color: 'var(--color-neutral-500)',
+            borderRadius: 'var(--radius-lg)',
+            transition: 'all var(--transition-fast)'
+          }}
         >
-          + Add custom item
+          <span className="flex items-center justify-center gap-2">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+            Add custom item
+          </span>
         </button>
       )}
 
       {/* Add Item Form */}
       {showAddForm && (
-        <div className="mb-4 p-4 bg-gray-50 rounded-lg">
+        <div className="mb-4 card" style={{
+          padding: 'var(--space-lg)',
+          background: 'var(--color-neutral-50)'
+        }}>
           <div className="grid grid-cols-2 gap-2 mb-2">
             <input
               type="text"
@@ -324,13 +359,13 @@ export function GroceryList({
           <div className="flex gap-2">
             <button
               onClick={handleAddItem}
-              className="flex-1 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+              className="btn-primary flex-1"
             >
               Add Item
             </button>
             <button
               onClick={() => setShowAddForm(false)}
-              className="py-2 px-4 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
+              className="btn-ghost px-4"
             >
               Cancel
             </button>
@@ -348,10 +383,15 @@ export function GroceryList({
           const checkedInCategory = categoryItems.filter((i) => i.checked).length;
 
           return (
-            <div key={category} className="border border-gray-200 rounded-lg overflow-hidden">
+            <div key={category} className="card overflow-hidden" style={{ padding: 0 }}>
               <button
                 onClick={() => toggleCategory(category)}
-                className="w-full px-4 py-3 bg-gray-50 flex items-center justify-between hover:bg-gray-100 transition-colors"
+                className="w-full flex items-center justify-between"
+                style={{
+                  padding: 'var(--space-md) var(--space-lg)',
+                  background: 'var(--color-neutral-50)',
+                  transition: 'background var(--transition-fast)'
+                }}
               >
                 <div className="flex items-center gap-2">
                   <svg
@@ -361,53 +401,72 @@ export function GroceryList({
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    style={{ color: 'var(--color-sage)' }}
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth={2}
+                      strokeWidth={2.5}
                       d="M9 5l7 7-7 7"
                     />
                   </svg>
-                  <span className="font-medium text-gray-900">{category}</span>
+                  <span className="font-semibold" style={{
+                    color: 'var(--foreground)',
+                    fontFamily: 'var(--font-heading)'
+                  }}>
+                    {category}
+                  </span>
                 </div>
-                <span className="text-sm text-gray-500">
+                <span className="text-sm font-medium" style={{
+                  color: 'var(--color-neutral-500)',
+                  background: 'white',
+                  padding: '0.25rem 0.625rem',
+                  borderRadius: 'var(--radius-full)'
+                }}>
                   {checkedInCategory}/{categoryItems.length}
                 </span>
               </button>
 
               {!isCollapsed && (
-                <div className="divide-y divide-gray-100">
+                <div style={{ borderTop: '1px solid var(--color-neutral-200)' }}>
                   {categoryItems.map((item) => (
                     <div
                       key={item.id}
                       data-testid={`grocery-item-${item.id}`}
                       data-grocery-item
-                      className={`px-4 py-3 flex items-center gap-3 transition-all duration-300 ${
-                        item.checked
+                      className={`flex items-center gap-3 transition-all duration-300 ${
+                        storeMode && item.checked ? 'order-last' : ''
+                      }`}
+                      style={{
+                        padding: 'var(--space-md) var(--space-lg)',
+                        background: item.checked
                           ? storeMode
-                            ? 'bg-green-50 opacity-60'
-                            : 'bg-gray-50'
-                          : 'hover:bg-gray-50'
-                      } ${storeMode && item.checked ? 'order-last' : ''}`}
+                            ? 'var(--color-neutral-50)'
+                            : 'var(--color-neutral-50)'
+                          : 'white',
+                        opacity: item.checked && storeMode ? 0.6 : 1,
+                        borderTop: '1px solid var(--color-neutral-100)'
+                      }}
                     >
                       {/* Checkbox */}
                       <input
                         type="checkbox"
                         checked={item.checked}
                         onChange={() => onToggleItem(item.id)}
-                        className={`w-5 h-5 rounded border-gray-300 focus:ring-2 transition-colors ${
-                          storeMode
-                            ? 'text-green-600 focus:ring-green-500'
-                            : 'text-blue-600 focus:ring-blue-500'
-                        }`}
+                        className="w-5 h-5 rounded transition-colors"
+                        style={{
+                          borderColor: 'var(--color-neutral-300)',
+                          accentColor: storeMode ? 'var(--color-mint)' : 'var(--color-sage)',
+                          cursor: 'pointer'
+                        }}
                       />
 
                       {/* Item Details */}
                       <div
-                        className={`flex-1 ${
-                          item.checked ? 'line-through text-gray-400' : ''
-                        }`}
+                        className={`flex-1 ${item.checked ? 'line-through' : ''}`}
+                        style={{
+                          color: item.checked ? 'var(--color-neutral-400)' : 'var(--foreground)'
+                        }}
                       >
                         {/* Quantity */}
                         {editing?.itemId === item.id && editing.field === 'quantity' ? (
