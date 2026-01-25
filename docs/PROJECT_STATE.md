@@ -5,15 +5,15 @@
 
 ## What's Next
 
-1. [ ] Add PWA offline support (implement service worker to complement existing manifest.json)
-2. [ ] Add recipe import/export validation to prevent malformed JSON
-3. [ ] Implement portion calculator reverse mode (search by ingredient you have)
-4. [ ] Add household sync with conflict resolution
-5. [ ] Build weekly meal planner with calendar integration
+1. [ ] Add recipe import/export validation to prevent malformed JSON
+2. [ ] Implement portion calculator reverse mode (search by ingredient you have)
+3. [ ] Add household sync with conflict resolution
+4. [ ] Build weekly meal planner with calendar integration
 
 ## What's Done
 
 ### Horizon 1 Features (Completed)
+- PWA offline support with service worker for caching and offline functionality
 - Smart dietary badges with auto-detection (vegetarian, vegan, gluten-free, dairy-free, nut-free)
 - Dietary filtering in recipe list
 - Store mode with category reordering by store layout
