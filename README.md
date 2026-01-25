@@ -2,11 +2,10 @@
 
 <!-- SB:APP
 name: Grocery List Generator
-slug: grocery-list-generator
-type: web
+type: app
 health: green
-owner: Grif
-last_verified: 2026-01-06
+owner: SignalBlueprint
+last_verified: 2026-01-24
 -->
 
 A local-first web app that generates consolidated grocery lists from selected recipes. Built with Next.js (App Router), TypeScript, and Tailwind CSS.

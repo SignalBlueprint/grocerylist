@@ -1,17 +1,29 @@
 ---
-repo: grocerylist
+project: Grocery List Generator
 source: VISION.md
-generated: 2026-01-08
+generated: 2026-01-24
 status: draft
 ---
 
-# Tasks: Grocery List Generator
+# Tasks - Grocery List Generator
+
+> Detailed task inventory. PROJECT_STATE.md is the primary source of truth for cycles.
+
+Last updated: 2026-01-24
 
 ## Overview
 
-This task list implements the vision for evolving the Grocery List Generator from a simple recipe-to-shopping-list converter into a comprehensive meal planning and shopping companion. The application already has a solid foundation with 12 seed recipes, intelligent ingredient merging (synonym mapping, unit normalization, category inference), and local persistence. These tasks extend that foundation across three horizons: quick wins that leverage existing data (dietary badges, store mode, reverse ingredient search), system expansions requiring new infrastructure (household sync, meal planning, price estimation), and blue-sky features that reframe the product entirely (anti-waste companion, community recipe network).
+This task list implements the vision for evolving the Grocery List Generator from a simple recipe-to-shopping-list converter into a comprehensive meal planning and shopping companion. The application has a solid foundation with smart dietary badges, store mode, dark mode, and E2E test coverage. These tasks extend that foundation across three horizons: quick wins (PWA, validation, reverse search), system expansions (household sync, meal planning, pricing), and blue-sky features (anti-waste, community network).
 
----
+## Active Sprint
+
+| ID | Task | Priority | Status | Effort | Source |
+|----|------|----------|--------|--------|--------|
+| T001 | PWA offline support (service worker) | high | pending | 4-6h | README |
+| T002 | Recipe import/export validation | high | pending | 3-4h | README |
+| T003 | Portion calculator reverse mode | medium | pending | 8-10h | VISION |
+| T004 | Household sync with conflict resolution | medium | pending | 20-30h | VISION |
+| T005 | Weekly meal planner with calendar | low | pending | 25-35h | VISION |
 
 ## Horizon 1: Quick Wins
 
@@ -685,4 +697,28 @@ This task list implements the vision for evolving the Grocery List Generator fro
 
 ---
 
-*Generated from VISION.md analysis. Review recommended before implementation begins.*
+## Backlog
+
+| ID | Item | Category | Horizon | Notes |
+|----|------|----------|---------|-------|
+| B001 | Price estimation with store comparison | feature | H2 | Requires crowd-sourced data or API |
+| B002 | Anti-waste kitchen companion | feature | H3 | Camera-based inventory tracking |
+| B003 | Community recipe remix network | feature | H3 | Requires user accounts and backend |
+| B004 | Conversational meal concierge | feature | H3 | AI/LLM integration |
+| B005 | Improve test coverage to 80%+ | tech-debt | — | Currently ~40% |
+| B006 | Add CI/CD pipeline | tech-debt | — | Automated testing and deployment |
+| B007 | Accessibility tests and ARIA labels | tech-debt | — | WCAG 2.1 compliance |
+
+## Completed
+
+| ID | Task | Completed | Notes |
+|----|------|-----------|-------|
+| C001 | Smart dietary badges | 2026-01-20 | Auto-detection with filtering |
+| C002 | Store mode with progress tracking | 2026-01-20 | Category reordering + sticky header |
+| C003 | Dark mode with theme persistence | 2026-01-20 | System-aware with manual override |
+| C004 | E2E test coverage | 2026-01-20 | Playwright tests for main flows |
+| C005 | Completion celebration | 2026-01-20 | Confetti animation |
+
+---
+
+*Reference document generated from VISION.md. See PROJECT_STATE.md for current development priorities.*

@@ -1,48 +1,47 @@
 ---
-repo: grocerylist
-scan_date: 2026-01-06
+project: Grocery List Generator
+generated: 2026-01-24
 status: draft
 ---
 
-# Vision Document: Grocery List Generator
+# Grocery List Generator Vision
 
-## Foundation Read
+## What It Is
 
-This is a local-first recipe-to-shopping-list converter. Users browse 12 seed recipes, select multiples, adjust serving sizes, and generate a merged grocery list with intelligent deduplication—"2 cloves garlic" from pasta plus "4 cloves garlic" from stir-fry becomes "6 cloves garlic" in the Produce section. The core value delivery happens in that merge: saving the mental arithmetic and category organization that makes shopping trips efficient.
+A local-first web app that transforms recipe selections into smart grocery lists with intelligent merging, dietary filtering, and store-optimized shopping flows. Users browse recipes, adjust servings, and generate consolidated shopping lists where ingredients are automatically combined ("2 cloves garlic" + "4 cloves garlic" = "6 cloves garlic"). Everything runs client-side with localStorage persistence - no backend required.
 
-Everything runs client-side with localStorage persistence. Lists export as text, print-ready pages, or shareable URLs with embedded QR codes.
+## Architecture
 
----
+- **Stack:** Next.js 16.1 (App Router), React 19, TypeScript 5, Tailwind CSS v4
+- **Data:** localStorage-based (4 keys: selected-recipes, custom-recipes, grocery-list, theme)
+- **Key patterns:** Local-first SPA, custom hooks (useLocalStorage, useUndoRedo), ThemeContext
+- **Merge engine:** 535 lines with synonym mapping (58+ ingredients), unit normalization (14 conversions), category inference (100+ keywords)
 
-## Architecture Snapshot
+## Current State
 
-### Stack
-- **Framework:** Next.js 16 (App Router) + React 19
-- **Language:** TypeScript 5 (strict mode)
-- **Styling:** Tailwind CSS v4
-- **Testing:** Vitest + React Testing Library
-- **Build:** Next.js bundler, no external backend
+- **Working:** Recipe selection, ingredient merging, dietary badges, store mode, dark mode, export features, E2E tests
+- **Broken/Missing:** PWA service worker not implemented, import validation minimal, ~40% test coverage
+- **Tech debt:** No CI/CD pipeline, no accessibility tests, malformed JSON import fails silently
 
-### Data
-- **Storage:** localStorage with four namespaced keys (selected-recipes, custom-recipes, grocery-list, theme)
-- **Seed Data:** 12 recipes in `/data/recipes.json` covering Italian, Asian, Mexican, Indian, American cuisines
-- **Key Models:** `Recipe` (id, name, cuisine, tags, servingsBase, ingredients[]) → `GroceryItem` (id, name, quantity, unit, category, checked, sourceRecipes[])
+## Opportunities
 
-### Patterns
-- **Architecture:** Monolithic SPA, no API routes
-- **State:** Custom hooks (`useLocalStorage`, `useUndoRedo`) + ThemeContext
-- **Core Logic:** 535-line merge engine with synonym mapping (58+ ingredients), unit normalization (14 conversions), and category inference (100+ keywords)
-- **Sharing:** Base64-compressed URL params with QR generation via external API
+### Quick Wins (< 1 day each)
 
-### Gaps
-- **No authentication**—anyone with a shared URL sees the list
-- **No backend sync**—data trapped in single browser
-- **~40% test coverage**—no E2E, no accessibility tests
-- **PWA incomplete**—manifest exists but service worker unverified
-- **No CI/CD** pipeline visible
-- **Import validation minimal**—malformed JSON fails silently
+1. **PWA offline support** - manifest.json exists; implement service worker for offline functionality
+2. **Recipe import/export validation** - Add JSON schema validation to prevent malformed data crashes
+3. **Portion calculator reverse mode** - Search by ingredient you have to find compatible recipes
 
----
+### Bigger Moves (multi-day)
+
+1. **Household sync with conflict resolution** - Real-time multi-device sync via WebRTC/Firebase with elegant conflict UI
+2. **Weekly meal planner** - Drag-and-drop calendar with consolidated shopping list and shelf-life optimization
+3. **Price estimation** - Crowd-sourced pricing with store comparison and budget mode substitutions
+
+## Open Questions
+
+- Should household sync require accounts or stay anonymous with room codes?
+- Which sync solution: WebRTC (peer-to-peer) vs Firebase (centralized) vs Supabase?
+- Is camera-based inventory tracking (anti-waste feature) too ambitious for local-first architecture?
 
 ## Latent Potential
 
