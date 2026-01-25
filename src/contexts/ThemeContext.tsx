@@ -32,7 +32,6 @@ export function ThemeProvider({
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem(storageKey) as Theme | null;
       if (stored && ['light', 'dark', 'system'].includes(stored)) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setThemeState(stored);
       }
     }
@@ -41,7 +40,7 @@ export function ThemeProvider({
 
   // Resolve system theme and apply
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || typeof window === 'undefined') return;
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 

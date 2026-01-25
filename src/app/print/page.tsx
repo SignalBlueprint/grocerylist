@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { GroceryItem, IngredientCategory } from '@/types';
 import { groupByCategory, formatQuantity } from '@/lib/merge-engine';
 import { reorderByStoreLayout, loadStoreModePreference } from '@/lib/store-mode';
+import { Providers } from '../providers';
 
 const DEFAULT_CATEGORIES: IngredientCategory[] = [
   'Produce',
@@ -47,7 +48,7 @@ function useGroceryItems() {
   return { items, isLoading };
 }
 
-export default function PrintPage() {
+function PrintPageContent() {
   const { items, isLoading } = useGroceryItems();
   const [storeMode] = useState(() => loadStoreModePreference());
 
@@ -155,5 +156,13 @@ export default function PrintPage() {
         <p>Checked: {items.filter((i) => i.checked).length}</p>
       </footer>
     </div>
+  );
+}
+
+export default function PrintPage() {
+  return (
+    <Providers>
+      <PrintPageContent />
+    </Providers>
   );
 }

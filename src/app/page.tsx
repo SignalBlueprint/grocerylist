@@ -17,13 +17,14 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { ShareModal } from '@/components/ShareModal';
 import { RecipeManager, RecipeImportExport } from '@/components/RecipeManager';
 import { AppSkeleton } from '@/components/Skeleton';
+import { Providers } from './providers';
 import recipesData from '../../data/recipes.json';
 
 const defaultRecipes: Recipe[] = recipesData as Recipe[];
 
 type View = 'recipes' | 'list';
 
-export default function Home() {
+function HomeContent() {
   const [isLoading, setIsLoading] = useState(true);
   const [view, setView] = useState<View>('recipes');
   const [selectedRecipes, setSelectedRecipes, clearSelectedRecipes] = useLocalStorage<SelectedRecipe[]>(
@@ -502,5 +503,13 @@ export default function Home() {
         className="sr-only"
       />
     </>
+  );
+}
+
+export default function Home() {
+  return (
+    <Providers>
+      <HomeContent />
+    </Providers>
   );
 }
