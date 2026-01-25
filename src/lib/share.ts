@@ -1,5 +1,4 @@
 import { GroceryItem, Recipe, DietaryBadge } from '@/types';
-import { groupByCategory, exportAsText } from './merge-engine';
 import { detectDietaryBadges, getBadgeInfo } from './dietary-utils';
 
 /**
@@ -119,7 +118,7 @@ export async function shareContent(options: {
     try {
       await navigator.share(options);
       return true;
-    } catch (err) {
+    } catch {
       // User cancelled or error
       return false;
     }

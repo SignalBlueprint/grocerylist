@@ -260,8 +260,8 @@ describe('copyToClipboard', () => {
     });
 
     // Mock DOM methods for fallback
-    const appendChildMock = vi.spyOn(document.body, 'appendChild').mockImplementation(() => null as any);
-    const removeChildMock = vi.spyOn(document.body, 'removeChild').mockImplementation(() => null as any);
+    const appendChildMock = vi.spyOn(document.body, 'appendChild').mockImplementation(() => null as unknown as Node);
+    const removeChildMock = vi.spyOn(document.body, 'removeChild').mockImplementation(() => null as unknown as Node);
 
     const result = await copyToClipboard('test text');
 
@@ -277,12 +277,10 @@ describe('copyToClipboard', () => {
     Object.assign(navigator, { clipboard: undefined });
 
     // Mock textarea and DOM methods
-    let capturedTextArea: HTMLTextAreaElement | null = null;
     const appendChildMock = vi.spyOn(document.body, 'appendChild').mockImplementation((node) => {
-      capturedTextArea = node as HTMLTextAreaElement;
       return node;
     });
-    const removeChildMock = vi.spyOn(document.body, 'removeChild').mockImplementation(() => null as any);
+    const removeChildMock = vi.spyOn(document.body, 'removeChild').mockImplementation(() => null as unknown as Node);
 
     // Mock select method on text area
     const mockSelect = vi.fn();
@@ -290,7 +288,7 @@ describe('copyToClipboard', () => {
       value: '',
       style: {},
       select: mockSelect,
-    } as any);
+    } as unknown as HTMLElement);
 
     // Mock execCommand
     const execCommandMock = vi.fn().mockReturnValue(true);

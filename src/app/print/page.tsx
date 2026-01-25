@@ -49,7 +49,7 @@ function useGroceryItems() {
 
 export default function PrintPage() {
   const { items, isLoading } = useGroceryItems();
-  const [storeMode, setStoreMode] = useState(false);
+  const [storeMode] = useState(() => loadStoreModePreference());
 
   const grouped = useMemo(() => groupByCategory(items), [items]);
 
@@ -60,12 +60,6 @@ export default function PrintPage() {
     }
     return DEFAULT_CATEGORIES;
   }, [storeMode]);
-
-  // Load store mode preference
-  useEffect(() => {
-    const savedPreference = loadStoreModePreference();
-    setStoreMode(savedPreference);
-  }, []);
 
   useEffect(() => {
     if (!isLoading && items.length > 0) {

@@ -8,6 +8,7 @@ interface ConfettiPiece {
   color: string;
   delay: number;
   duration: number;
+  rotation: number;
 }
 
 interface ConfettiProps {
@@ -39,6 +40,7 @@ export function Confetti({ active, duration = 3000 }: ConfettiProps) {
         color: COLORS[Math.floor(Math.random() * COLORS.length)],
         delay: Math.random() * 500,
         duration: 2000 + Math.random() * 1000,
+        rotation: Math.random() * 360,
       });
     }
     return newPieces;
@@ -46,6 +48,7 @@ export function Confetti({ active, duration = 3000 }: ConfettiProps) {
 
   useEffect(() => {
     if (active) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPieces(generatePieces());
       setIsVisible(true);
 
@@ -76,7 +79,7 @@ export function Confetti({ active, duration = 3000 }: ConfettiProps) {
             className="w-3 h-3 animate-confetti-spin"
             style={{
               backgroundColor: piece.color,
-              transform: `rotate(${Math.random() * 360}deg)`,
+              transform: `rotate(${piece.rotation}deg)`,
             }}
           />
         </div>

@@ -15,15 +15,13 @@ export function ShareModal({ items, isOpen, onClose }: ShareModalProps) {
   const [shareUrl, setShareUrl] = useState('');
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState<'link' | 'text' | 'qr'>('link');
-  const [canNativeShare, setCanNativeShare] = useState(false);
-
-  useEffect(() => {
-    // Check for Web Share API support on client side
-    setCanNativeShare(typeof navigator !== 'undefined' && 'share' in navigator);
-  }, []);
+  const [canNativeShare] = useState(() =>
+    typeof navigator !== 'undefined' && 'share' in navigator
+  );
 
   useEffect(() => {
     if (isOpen && items.length > 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShareUrl(generateShareUrl(items));
     }
   }, [isOpen, items]);

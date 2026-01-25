@@ -6,7 +6,6 @@ import {
   DAIRY_INGREDIENTS,
   NUT_INGREDIENTS,
   getBadgeInfo,
-  DietaryBadge,
 } from './dietary-utils';
 import { Ingredient } from '@/types';
 

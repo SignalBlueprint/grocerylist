@@ -7,7 +7,6 @@ import { useUndoRedo } from '@/hooks/useUndoRedo';
 import { scaleIngredients, mergeIngredients } from '@/lib/merge-engine';
 import { parseShareUrl } from '@/lib/share';
 import {
-  STORE_MODE_STORAGE_KEY,
   loadStoreModePreference,
   saveStoreModePreference,
 } from '@/lib/store-mode';
@@ -46,13 +45,7 @@ export default function Home() {
   const [showShareModal, setShowShareModal] = useState(false);
   const [showRecipeManager, setShowRecipeManager] = useState(false);
   const [editingRecipe, setEditingRecipe] = useState<Recipe | null>(null);
-  const [storeMode, setStoreMode] = useState(false);
-
-  // Load store mode preference from localStorage on mount
-  useEffect(() => {
-    const savedPreference = loadStoreModePreference();
-    setStoreMode(savedPreference);
-  }, []);
+  const [storeMode, setStoreMode] = useState(() => loadStoreModePreference());
 
   // Handle store mode toggle
   const handleToggleStoreMode = useCallback(() => {
@@ -83,6 +76,7 @@ export default function Home() {
       const sharedList = parseShareUrl(window.location.href);
       if (sharedList && sharedList.length > 0) {
         setGroceryList(sharedList);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setView('list');
         // Clean up URL
         window.history.replaceState({}, '', window.location.pathname);

@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { GroceryItem, IngredientCategory } from '@/types';
 import { groupByCategory, formatQuantity, exportAsText } from '@/lib/merge-engine';
-import { reorderByStoreLayout, STORE_LAYOUTS } from '@/lib/store-mode';
+import { reorderByStoreLayout } from '@/lib/store-mode';
 import { StoreModeToggle } from './StoreModeToggle';
 import { Confetti } from './Confetti';
 
@@ -76,6 +76,7 @@ export function GroceryList({
   // Trigger celebration when all items are checked in store mode
   useEffect(() => {
     if (storeMode && totalCount > 0 && remainingCount === 0 && prevRemainingRef.current !== 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowCelebration(true);
       // Reset celebration after animation completes
       const timer = setTimeout(() => setShowCelebration(false), 4000);

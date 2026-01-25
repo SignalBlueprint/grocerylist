@@ -371,7 +371,7 @@ export function RecipeImportExport({ recipes, onImport }: RecipeImportExportProp
           onImport(validRecipes);
           alert(`Imported ${validRecipes.length} recipes!`);
         }
-      } catch (err) {
+      } catch {
         alert('Failed to import recipes. Please check the file format.');
       }
     };
