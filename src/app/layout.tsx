@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 
 export const metadata: Metadata = {
   title: "Fresh Market - Grocery List Generator",
@@ -17,10 +16,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#6B8F71" },
-    { media: "(prefers-color-scheme: dark)", color: "#8AAA8F" },
-  ],
+  themeColor: "#6B8F71",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -35,7 +31,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased transition-colors">
-        <ServiceWorkerRegistration />
         {children}
       </body>
     </html>

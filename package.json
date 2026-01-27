@@ -14,9 +14,9 @@
     "test:e2e:headed": "playwright test --headed"
   },
   "dependencies": {
-    "next": "^16.1.4",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "next": "16.1.5",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.0",

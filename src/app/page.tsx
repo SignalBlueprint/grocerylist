@@ -17,6 +17,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { ShareModal } from '@/components/ShareModal';
 import { RecipeManager, RecipeImportExport } from '@/components/RecipeManager';
 import { AppSkeleton } from '@/components/Skeleton';
+import { ServiceWorkerRegistration } from '@/components/ServiceWorkerRegistration';
 import { Providers } from './providers';
 import recipesData from '../../data/recipes.json';
 
@@ -253,6 +254,8 @@ function HomeContent() {
 
   return (
     <>
+      <ServiceWorkerRegistration />
+
       {/* Skip link for accessibility */}
       <a href="#main-content" className="skip-link">
         Skip to main content
